@@ -1,0 +1,66 @@
+{% extends 'admin/general/base-nav.html' %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <!-- Header with Icon -->
+    <div class="text-center mb-4">
+        <div class="d-inline-block bg-light rounded-circle p-3 mb-3">
+            <i class="bi bi-grid-3x3-gap fs-1 text-primary"></i>
+        </div>
+        <h1 class="fw-bold text-dark">{{ context.category.name }}</h1>
+        <p class="text-muted">Service Category Overview</p>
+    </div>
+
+    <!-- Stats Cards in a clean row -->
+    <div class="row g-4 justify-content-center mb-5">
+        <!-- Services Count -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle p-3 mb-3">
+                        <i class="bi bi-layers fs-2 text-primary"></i>
+                    </div>
+                    <h3 class="display-4 fw-bold text-primary mb-0">{{ context.total_services }}</h3>
+                    <p class="text-muted mb-0">Total Services</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Average Price -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 rounded-circle p-3 mb-3">
+                        <i class="bi bi-currency-dollar fs-2 text-success"></i>
+                    </div>
+                    <h3 class="display-4 fw-bold text-success mb-0">${{ context.average_price|floatformat:2 }}</h3>
+                    <p class="text-muted mb-0">Average Price</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Average Duration -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10 rounded-circle p-3 mb-3">
+                        <i class="bi bi-clock fs-2 text-warning"></i>
+                    </div>
+                    <h3 class="display-4 fw-bold text-warning mb-0">{{ context.average_duration }}</h3>
+                    <p class="text-muted mb-0">Average Minutes</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Button Row -->
+    <div class="d-flex justify-content-center gap-3">
+        <a href="{% url 'services:manage_categories' %}" class="btn btn-outline-dark px-4 py-2 rounded-pill">
+            <i class="bi bi-arrow-left me-2"></i>Back to Categories
+        </a>
+        <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">
+            <i class="bi bi-plus-circle me-2"></i>Add Service
+        </a>
+    </div>
+</div>
+{% endblock %}

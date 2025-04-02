@@ -1,0 +1,65 @@
+{% extends 'admin/general/base-nav.html' %}
+
+{% block title %}Barber Profile{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="mb-4">Barber Profile: {{ barber.user.username }}</h2>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h5>Barber Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-4">
+                    <img src="{{ barber.image.url|default:'static/images/default-barber.png' }}"
+                         class="rounded-circle border me-3"
+                         style="width: 120px; height: 120px; object-fit: cover;"
+                         alt="{{ barber.user.first_name }} {{ barber.user.last_name }}'s profile picture">
+                    <h4 class="fw-bold text-dark mb-0">{{ barber.user.first_name }} {{ barber.user.last_name }}</h4>
+                </div>
+                <table class="table table-borderless">
+                    <tr>
+                        <th>Username:</th>
+                        <td>@{{ barber.user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{ barber.user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number:</th>
+                        <td>{{ barber.user.phone_number|default:"N/A" }}</td>
+                    </tr>
+                    <tr>
+                        <th>Rating:</th>
+                        <td><span class="text-warning fw-bold">⭐ {{ barber.rating }}</span></td>
+                    </tr>
+                    <tr>
+                        <th>Experience:</th>
+                        <td>{{ barber.experience_years }} years</td>
+                    </tr>
+                    <tr>
+                        <th>Bio:</th>
+                        <td>{{ barber.bio|default:"No bio available." }}</td>
+                    </tr>
+                    <tr>
+                        <th>Services:</th>
+                        <td>
+                            {% for service in services %}
+                                <a href="{% url 'services:haircut_view' service.id %}"
+                                   class="badge bg-secondary">{{ service.name }}</a>
+                            {% empty %}
+                                <span class="text-muted">No Services</span>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="{% url 'services:manage_barbers' %}" class="btn btn-secondary">Back</a>
+                <a href="{% url 'services:manage_barber_edit' barber.id %}" class="btn btn-primary">Edit Barber</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
