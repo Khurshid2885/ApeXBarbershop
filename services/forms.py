@@ -79,9 +79,16 @@ class BarberEditForm(forms.ModelForm):
     phone_number = forms.CharField(max_length=20, required=True)
     img_file = forms.FileField(required=False)
 
+    # Select services
+    services = forms.ModelMultipleChoiceField(
+        queryset=Service.objects.all(),  # Get all services
+        widget=forms.SelectMultiple(attrs={'class': 'form-control', 'size': '5'}),  # Makes selection taller
+        required=False
+    )
+
     class Meta:
         model = BarberProfile
-        fields = ['bio', 'experience_years', 'image', 'rating']
+        fields = ['bio', 'experience_years', 'image', 'rating', "services"]
         widgets = {
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
@@ -112,6 +119,10 @@ class BarberEditForm(forms.ModelForm):
 
         if self.cleaned_data.get("img_file"):
             barber.image = self.cleaned_data.get("img_file")
+
+        services = self.cleaned_data.get("services")
+        if services:
+            barber.services.set(services)
 
         if commit:
             barber.save()
@@ -155,4 +166,22 @@ class UserEditForm(forms.ModelForm):
 class CategoryCreateForm(forms.ModelForm):
     class Meta:
         model = ServiceCategory
-        fields = ["name"]
+        fields = ["name", "main_image"]
+
+
+class CategoryEditForm(forms.ModelForm):
+    class Meta:
+        model = ServiceCategory
+        fields = ["name", "main_image"]
+
+
+class ServiceCreateForm(forms.ModelForm):
+    class Meta:
+        model = Service
+        fields = ["img_file", "name", "description", "price", "duration"]
+
+
+class ServiceEditForm(forms.ModelForm):
+    class Meta:
+        model = Service
+        fields = ["img_file", "name", "description", "price", "duration"]

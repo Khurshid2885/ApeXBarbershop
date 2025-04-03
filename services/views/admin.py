@@ -6,7 +6,7 @@ from django.db.models.aggregates import Sum, Avg
 from django.shortcuts import redirect, render, get_object_or_404
 
 from services.forms import HaircutEditForm, HaircutCreateForm, BarberEditForm, BarberCreateForm, UserEditForm, \
-    CategoryCreateForm
+    CategoryCreateForm, CategoryEditForm, ServiceCreateForm, ServiceEditForm
 from services.models import Service
 from accounts.models import BarberProfile, CustomUser
 from services.models.service import ServiceCategory
@@ -19,6 +19,7 @@ def manage_barbers(request):
     return render(request, "admin/barbers/manage-barbers.html", {"barbers": barbers})
 
 
+@superadmin_required
 def manage_barber_view(request, barber_id):
     barber = BarberProfile.objects.get(id=barber_id)
     services = barber.services.all()
@@ -47,8 +48,11 @@ def barber_create(request):
 def barber_edit(request, barber_id):
     barber = BarberProfile.objects.get(id=barber_id)
     user = barber.user
+    all_services = Service.objects.all()
 
     form = BarberEditForm(instance=barber, user_instance=user)
+    # Pre-Fill the selected services
+    form.fields['services'].initial = barber.services.all()
 
     if request.method == "POST":
         form = BarberEditForm(request.POST, request.FILES, instance=barber, user_instance=user)
@@ -56,9 +60,8 @@ def barber_edit(request, barber_id):
             form.save()
             return redirect("services:manage_barbers")
 
-        return render(request, "services/../../templates/admin/barbers/barber_edit.html", {"form": form})
-
-    return render(request, "services/../../templates/admin/barbers/barber_edit.html", {"form": form})
+    return render(request, "services/../../templates/admin/barbers/barber_edit.html",
+                  {"form": form, "services": all_services})
 
 
 @permission_required("services.delete_barberprofile", raise_exception=True)
@@ -262,7 +265,9 @@ def manage_category_overview(request, category_id):
 @superadmin_required
 def manage_category_view(request, category_id):
     services = Service.objects.filter(category=category_id)
-    return render(request, "admin/services/categories/category_view.html", {"services": services})
+    category = ServiceCategory.objects.get(id=category_id)
+
+    return render(request, "admin/services/categories/category_view.html", {"services": services, "category": category})
 
 
 @superadmin_required
@@ -270,7 +275,7 @@ def category_create(request):
     form = CategoryCreateForm()
 
     if request.method == "POST":
-        form = CategoryCreateForm(request.POST)
+        form = CategoryCreateForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("services:manage_categories")
@@ -280,13 +285,23 @@ def category_create(request):
 
 @superadmin_required
 def category_edit(request, category_id):
-    category = ServiceCategory.objects.filter(id=category_id)
-    return render(request, "admin/services/categories/category-edit.html", {"category": category})
+    category = ServiceCategory.objects.get(id=category_id)
+
+    form = CategoryEditForm(instance=category)
+    if request.method == "POST":
+        form = CategoryEditForm(request.POST, request.FILES, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect("services:manage_categories")
+
+    return render(request, "admin/services/categories/category-edit.html", {"category": category, "form": form})
 
 
 @superadmin_required
-def category_delete(request):
-    pass
+def category_delete(request, category_id):
+    category = ServiceCategory.objects.get(id=category_id)
+    category.delete()
+    return redirect("services:manage_categories")
 
 
 # TODO . Service Management
@@ -298,19 +313,44 @@ def manage_services(request):
 
 @superadmin_required
 def manage_service_view(request, service_id):
-    return render(request, "admin/services/services/service_view.html")
+    service = Service.objects.get(id=service_id)
+    return render(request, "admin/services/services/service_view.html", {"service": service})
 
 
 @superadmin_required
-def service_create(request):
-    pass
+def service_create(request, category_id):
+    category = ServiceCategory.objects.get(id=category_id)
+    form = ServiceCreateForm()
+
+    if request.method == "POST":
+        form = ServiceCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            service = form.save(commit=False)
+            service.category = category
+            service.save()
+            return redirect("services:manage_category_view", category_id=category_id)
+
+    return render(request, "admin/services/services/service_create.html", {"form": form, "category": category})
 
 
 @superadmin_required
-def service_edit(request):
-    pass
+def service_edit(request, service_id):
+    service = Service.objects.get(id=service_id)
+    category_id = service.category.id
+
+    form = ServiceEditForm(instance=service)
+    if request.method == "POST":
+        form = ServiceEditForm(request.POST, request.FILES, instance=service)
+        if form.is_valid():
+            form.save()
+            return redirect("services:manage_category_view", category_id)
+
+    return render(request, "admin/services/services/service_edit.html", {"service": service, "form": form})
 
 
 @superadmin_required
-def service_delete(request):
-    pass
+def service_delete(request, service_id):
+    service = Service.objects.get(id=service_id)
+    category_id = service.category.id
+    service.delete()
+    return redirect("services:manage_category_view", category_id=category_id)
