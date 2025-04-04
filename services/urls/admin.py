@@ -39,15 +39,15 @@ urlpatterns = [
     path("client-delete/<int:client_id>", client_delete, name="client_delete"),
 
     # Categories
-    path("category-overview/<int:category_id>", manage_category_overview, name="manage_category_overview"),
-    path("category-view/<int:category_id>", manage_category_view, name="manage_category_view"),
+    path("category-overview/<int:category_id>/", manage_category_overview, name="manage_category_overview"),
+    path("category-view/<int:category_id>/", manage_category_view, name="manage_category_view"),
     path("category-create/", category_create, name="category_create"),
-    path("category-edit/<int:category_id>", category_edit, name="category_edit"),
-    path("category-delete/<int:category_id>", category_delete, name="category_delete"),
+    path("category-edit/<int:category_id>/", category_edit, name="category_edit"),
+    path("category-delete/<int:category_id>/", category_delete, name="category_delete"),
 
     # Category --> Services
-    path("service-view/<int:service_id>", manage_service_view, name="manage_service_view"),
-    path("service-create/", service_create, name="service_create"),
-    path("service-edit/<int:service_id>", service_edit, name="service_edit"),
-    path("service-delete/<int:service_id>", service_delete, name="service_delete"),
+    path("service-view/<int:service_id>/", manage_service_view, name="manage_service_view"),
+    path("service-create/<int:category_id>/", service_create, name="service_create"),
+    path("service-edit/<int:service_id>/", service_edit, name="service_edit"),
+    path("service-delete/<int:service_id>/", service_delete, name="service_delete"),
 ]

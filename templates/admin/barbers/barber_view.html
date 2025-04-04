@@ -6,8 +6,8 @@
     <div class="container mt-4">
         <h2 class="mb-4">Barber Profile: {{ barber.user.username }}</h2>
 
-        <div class="card shadow-sm">
-            <div class="card-header bg-info text-white">
+        <div class="card shadow-sm mb-5">  <!-- Added mb-5 for extra space before footer -->
+            <div class="card-header bg-dark text-white">
                 <h5>Barber Information</h5>
             </div>
             <div class="card-body">
@@ -47,7 +47,7 @@
                         <th>Services:</th>
                         <td>
                             {% for service in services %}
-                                <a href="{% url 'services:haircut_view' service.id %}"
+                                <a href="{% url 'services:manage_service_view' service.id %}"
                                    class="badge bg-secondary">{{ service.name }}</a>
                             {% empty %}
                                 <span class="text-muted">No Services</span>

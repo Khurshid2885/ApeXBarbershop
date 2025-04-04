@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-
 from accounts.forms import ProfileEditForm
 
 

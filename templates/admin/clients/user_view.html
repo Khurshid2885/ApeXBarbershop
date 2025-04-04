@@ -5,7 +5,7 @@
         <h2 class="mb-4">User Details: {{ user.username }}</h2>
 
         <div class="card shadow-sm">
-            <div class="card-header bg-info text-white">
+            <div class="card-header bg-dark text-white">
                 <h5>User Information</h5>
             </div>
             <div class="card-body">
@@ -45,9 +45,21 @@
                 </table>
             </div>
             <div class="card-footer d-flex justify-content-between">
-                <a href="{% url 'services:users_list' %}" class="btn btn-secondary">Back to Users</a>
+                <a href="javascript:void(0);" onclick="goBack()" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1"></i> Back to List
+                </a>
                 <a href="{% url 'services:user_edit' user.id %}" class="btn btn-primary">Edit User</a>
+
             </div>
         </div>
+        <script>
+            function goBack() {
+                if (document.referrer) {
+                    window.history.back();  // Go back if there is a referrer
+                } else {
+                    window.location.href = "{% url 'services:users_list'  %}";  // Fallback URL
+                }
+            }
+        </script>
     </div>
 {% endblock %}

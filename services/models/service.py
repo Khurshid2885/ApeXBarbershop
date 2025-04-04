@@ -7,6 +7,7 @@ from django.db import models
 
 class ServiceCategory(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    main_image = models.ImageField(upload_to='category_images/', null=True, blank=True)  # Add this field
 
     def __str__(self):
         return self.name
@@ -22,7 +23,7 @@ class Service(BaseModel):
     name = models.CharField(max_length=50)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=3, validators=[
-        MinValueValidator(0), MaxValueValidator(200.000)
+        MinValueValidator(0), MaxValueValidator(1_000_000)
     ])
     duration = models.PositiveIntegerField(default=30, help_text="minutes")
     img_file = models.ImageField(upload_to="services/%Y/%m/%d/")

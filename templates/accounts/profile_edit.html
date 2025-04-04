@@ -26,6 +26,13 @@
                             {% endif %}
                             <div class="mb-2">
                                 {{ form.profile_photo|add_class:"form-control form-control-sm" }}
+                                {% if form.profile_photo.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.profile_photo.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
 
@@ -36,14 +43,35 @@
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">Username</label>
                                         {{ form.username|add_class:"form-control form-control-sm" }}
+                                        {% if form.username.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.username.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">First Name</label>
                                         {{ form.first_name|add_class:"form-control form-control-sm" }}
+                                        {% if form.first_name.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.first_name.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">Email</label>
                                         {{ form.email|add_class:"form-control form-control-sm" }}
+                                        {% if form.email.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.email.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
 
@@ -51,10 +79,24 @@
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">Last Name</label>
                                         {{ form.last_name|add_class:"form-control form-control-sm" }}
+                                        {% if form.last_name.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.last_name.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">Phone</label>
                                         {{ form.phone_number|add_class:"form-control form-control-sm" }}
+                                        {% if form.phone_number.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.phone_number.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +112,7 @@
 
                 <div class="text-center mt-2">
                     <a href="{% url 'accounts:profile_view' %}" class="text-muted text-decoration-none">
-                        <i class="fas fa-arrow-left"></i> Back
+                        <i class="fas fa-arrow-left"></i> Cancel
                     </a>
                 </div>
             </div>
