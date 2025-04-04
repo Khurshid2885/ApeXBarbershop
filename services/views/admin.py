@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 
 from services.forms import HaircutEditForm, HaircutCreateForm, BarberEditForm, BarberCreateForm, UserEditForm, \
     CategoryCreateForm, CategoryEditForm, ServiceCreateForm, ServiceEditForm
-from services.models import Service
+from services.models import Service, Appointment
 from accounts.models import BarberProfile, CustomUser
 from services.models.service import ServiceCategory
 from services.utils import superadmin_required
@@ -173,7 +173,28 @@ def client_delete(request, client_id):
 
 @superadmin_required
 def manage_appointments(request):
-    pass
+    appointments = Appointment.objects.all()
+    return render(request, "admin/appointments/manage-appointments.html", {"appointments": appointments})
+
+
+@superadmin_required
+def appointment_view(request):
+    return render(request, "admin/appointments/appointment-view.html")
+
+
+@superadmin_required
+def appointment_create(request):
+    return render(request, "admin/appointments/appointment-create.html")
+
+
+@superadmin_required
+def appointment_edit(request, appointment_id):
+    return render(request, "admin/appointments/appointment-edit.html")
+
+
+@superadmin_required
+def appointment_delete(request, appointment_id):
+    return redirect("services:manage_appointments")
 
 
 # TODO .

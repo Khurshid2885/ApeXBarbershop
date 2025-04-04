@@ -1,0 +1,67 @@
+{% extends 'admin/general/base-nav.html' %}
+
+{% block title %}Manage Appointments - ApeX{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fw-bold">Manage Appointments</h2>
+            <a href="{% url 'services:appointment_create' %}" class="btn btn-success">+ New Appointment</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search appointments..." aria-label="Search">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+
+        <!-- Appointments Table -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Client</th>
+                            <th>Barber</th>
+                            <th>Service Type</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for appointment in appointments %}
+                            <tr>
+                                <td>{{ appointment.id }}</td>
+                                <td>{{ appointment.customer.name }}</td>
+                                <td>{{ appointment.barber.name }}</td>
+                                <td>{{ appointment.service.name }}</td>
+                                <td>{{ appointment.date }}</td>
+                                <td>{{ appointment.time }}</td>
+                                <td>
+                                    <span class="badge {% if appointment.status == 'Completed' %}bg-success{% elif appointment.status == 'Pending' %}bg-warning text-dark{% else %}bg-danger{% endif %}">
+                                        {{ appointment.status }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{% url 'services:appointment_edit' appointment.id %}"
+                                       class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'services:appointment_delete' appointment.id %}"
+                                       class="btn btn-sm btn-outline-danger">Delete</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center text-muted">No appointments found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

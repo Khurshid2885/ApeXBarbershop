@@ -6,8 +6,8 @@ from services.views.admin import dashboard, manage_barbers, manage_clients, mana
     barber_delete, client_view, \
     client_edit, client_delete, \
     manage_service_view, category_edit, \
-    manage_services, manage_category_view, category_create, category_delete, service_create, service_edit, \
-    service_delete, manage_category_overview
+    manage_category_view, category_create, category_delete, service_create, service_edit, \
+    service_delete, manage_category_overview, appointment_view, appointment_create, appointment_edit, appointment_delete
 
 urlpatterns = [
     # Main - Navbar
@@ -21,6 +21,12 @@ urlpatterns = [
     path("manage-clients/", manage_clients, name="manage_clients"),
     path("manage-appointments/", manage_appointments, name="manage_appointments"),
     path("manage-categories/", manage_categories, name="manage_categories"),
+
+    # Appointments
+    path("appointment-view/", appointment_view, name="appointment_view"),
+    path("appointment-create/", appointment_create, name="appointment_create"),
+    path("appointment-edit/", appointment_edit, name="appointment_edit"),
+    path("appointment-delete/", appointment_delete, name="appointment_delete"),
 
     # Users
     path("user-view/<int:user_id>", user_view, name="user_view"),
