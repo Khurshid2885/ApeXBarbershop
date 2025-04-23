@@ -84,7 +84,7 @@ def barber_delete(request, barber_id):
 def dashboard(request):
     # Getting Group members
     barbers = len(Group.objects.get(name="barber").user_set.all())
-    clients = len(Group.objects.get(name="services").user_set.all())
+    clients = len(Group.objects.get(name="client").user_set.all())
     return render(request, "admin/general/dashboard.html", {"barbers": barbers, "clients": clients})
 
 
@@ -136,7 +136,7 @@ def settings(request):
 
 @superadmin_required
 def manage_clients(request):
-    client_group = Group.objects.get(name="services")
+    client_group = Group.objects.get(name="client")
     clients = CustomUser.objects.filter(groups=client_group)
     return render(request, "admin/clients/clients_list.html", {"clients": clients})
 

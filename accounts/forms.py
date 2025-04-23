@@ -45,8 +45,9 @@ class LoginForm(forms.Form):
         if user:
             login(request, user)
             if user.is_superuser:
+                print("salom")
                 return redirect("services:dashboard")
-            elif user.groups.filter(name="barber"):
+            elif user.groups.filter(name="barber").exists():
                 return redirect("services:barbers_homepage")
             else:
                 return redirect("services:home")
