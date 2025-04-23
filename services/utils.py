@@ -25,7 +25,6 @@ def barber_required(view_func):
 
 def barber_blocked(view_func):
     def wrapper(request, *args, **kwargs):
-        print(request.user.groups.all())
         if request.user.groups.filter(name="barber").exists():
             raise PermissionDenied
         return view_func(request, *args, **kwargs)
