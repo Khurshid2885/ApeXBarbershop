@@ -1,3 +1,5 @@
+from django.shortcuts import render
 
-def main_page(request):
-    pass
+
+def barbers_homepage(request):
+    return render(request, "barber/home.html")

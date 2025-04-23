@@ -1,5 +1,4 @@
 from django.urls.conf import path, include
-
 from services.views import home, about
 
 app_name = "services"
@@ -11,5 +10,10 @@ urlpatterns = [
     # Admin
     path('services/admin/', include('services.urls.admin')),
 
-    path('services/', include('services.urls.services')),
+    # Barber
+    path('services/barber', include('services.urls.barber')),
+
+    # Client
+    path('services/', include('services.urls.client')),
+
 ]

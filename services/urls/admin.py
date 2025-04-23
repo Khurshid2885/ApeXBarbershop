@@ -40,9 +40,9 @@ urlpatterns = [
     path('barber-delete/<int:barber_id>', barber_delete, name="manage_barber_delete"),
 
     # Clients
-    path("client-view/<int:client_id>", client_view, name="client_view"),
-    path("client-edit/<int:client_id>", client_edit, name="client_edit"),
-    path("client-delete/<int:client_id>", client_delete, name="client_delete"),
+    path("services-view/<int:client_id>", client_view, name="client_view"),
+    path("services-edit/<int:client_id>", client_edit, name="client_edit"),
+    path("services-delete/<int:client_id>", client_delete, name="client_delete"),
 
     # Categories
     path("category-overview/<int:category_id>/", manage_category_overview, name="manage_category_overview"),
