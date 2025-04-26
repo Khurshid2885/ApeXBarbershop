@@ -1,0 +1,174 @@
+{% extends 'admin/general/base-nav.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">  {# Shrunk from col-lg-11 to col-lg-10 #}
+                <!-- Page Header -->
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h2 class="h4 fw-bold mb-0">
+                        Edit Service: <span class="text-muted">{{ service.name }}</span>
+                    </h2>
+                </div>
+                <!-- Main Content Card -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-3">  {# Reduced padding from p-4/p-5 to p-3 #}
+                        <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+                            <div class="row g-4">
+                                <!-- Left Column: Image Preview & File Upload -->
+                                <div class="col-md-4">
+                                    <div class="mb-3 text-center">
+                                        {% if service.img_file %}
+                                            <img id="imgPreview" src="{{ service.img_file.url }}"
+                                                 alt="{{ service.name }}"
+                                                 class="img-thumbnail rounded" style="max-height: 180px; width: auto;">
+                                        {% else %}
+                                            <div id="noImagePlaceholder"
+                                                 class="d-flex justify-content-center align-items-center bg-light rounded"
+                                                 style="height: 180px; width: 100%;">
+                                                <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <img id="imgPreview" src="#" alt="Service preview"
+                                                 class="d-none img-thumbnail rounded"
+                                                 style="max-height: 180px; width: auto;">
+                                        {% endif %}
+                                    </div>
+                                    <div class="mt-3">
+                                        {% for field in form %}
+                                            {% if field.name == 'img_file' %}
+                                                <label for="{{ field.id_for_label }}" class="form-label fw-medium mb-1">
+                                                    Update Image
+                                                </label>
+                                                {{ field|add_class:"form-control" }}
+                                                {% for error in field.errors %}
+                                                    <div class="text-danger mt-1">{{ error }}</div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <!-- Right Column: Other Fields -->
+                                <div class="col-md-8">
+                                    <div class="row g-3">
+                                        <!-- Service Name -->
+                                        {% for field in form %}
+                                            {% if field.name == 'name' %}
+                                                <div class="col-12">
+                                                    <label for="{{ field.id_for_label }}"
+                                                           class="form-label fw-medium mb-2">
+                                                        {{ field.label }} <span class="text-danger">*</span>
+                                                    </label>
+                                                    {{ field|add_class:"form-control" }}
+                                                    {% for error in field.errors %}
+                                                        <div class="text-danger mt-1">{{ error }}</div>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <!-- Price Field -->
+                                        <div class="col-md-6">
+                                            {% for field in form %}
+                                                {% if field.name == 'price' %}
+                                                    <label for="{{ field.id_for_label }}"
+                                                           class="form-label fw-medium mb-2">
+                                                        {{ field.label }} <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        {{ field|add_class:"form-control" }}
+                                                        <span class="input-group-text">UZS</span>
+                                                    </div>
+                                                    {% for error in field.errors %}
+                                                        <div class="text-danger mt-1">{{ error }}</div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <!-- Duration Field -->
+                                        <div class="col-md-6">
+                                            {% for field in form %}
+                                                {% if field.name == 'duration' %}
+                                                    <label for="{{ field.id_for_label }}"
+                                                           class="form-label fw-medium mb-2">
+                                                        {{ field.label }} <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        {{ field|add_class:"form-control" }}
+                                                        <span class="input-group-text">min</span>
+                                                    </div>
+                                                    {% for error in field.errors %}
+                                                        <div class="text-danger mt-1">{{ error }}</div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+
+                                        <!-- Description Field -->
+                                        <div class="col-12">
+                                            {% for field in form %}
+                                                {% if field.name == 'description' %}
+                                                    <label for="{{ field.id_for_label }}"
+                                                           class="form-label fw-medium mb-2">
+                                                        {{ field.label }}
+                                                    </label>
+                                                    {{ field|add_class:"form-control"|attr:"rows:6" }}
+                                                    <!-- Increased rows to make it taller -->
+                                                    {% for error in field.errors %}
+                                                        <div class="text-danger mt-1">{{ error }}</div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+
+                                        <!-- Action Buttons -->
+                                        <div class="col-12 mt-3">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary me-2">
+                                                    <i class="bi bi-save me-1"></i> Save Changes
+                                                </button>
+                                                <a href="{% url 'services:manage_category_view' service.category.id %}"
+                                                   class="btn btn-outline-secondary">
+                                                    Cancel
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {# end row g-3 #}
+                                </div>
+                                {# end col-md-8 #}
+                            </div>
+                            {# end row g-4 #}
+                        </form>
+                    </div>
+                    {# end card-body #}
+                </div>
+                {# end card #}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image preview functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const imgInput = document.querySelector('input[type="file"]');
+            const imgPreview = document.getElementById('imgPreview');
+            const noImagePlaceholder = document.getElementById('noImagePlaceholder');
+
+            imgInput.addEventListener('change', function () {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imgPreview.src = e.target.result;
+                        imgPreview.classList.remove('d-none');
+                        if (noImagePlaceholder) {
+                            noImagePlaceholder.classList.add('d-none');
+                        }
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+{% endblock %}

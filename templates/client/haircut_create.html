@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Add Haircut{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card shadow-lg border-0 p-4" style="max-width: 800px;">
+            <div class="card-body">
+                <h4 class="text-center text-dark mb-4">
+                    ✂️ Add Haircut
+                </h4>
+
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <!-- Left Side - Image Preview and Upload -->
+                        <div class="col-md-4 text-center">
+                            <!-- Image Preview (default placeholder) -->
+                            <img id="imagePreview"
+                                 src="https://via.placeholder.com/300"
+                                 alt="Haircut Preview"
+                                 class="rounded img-thumbnail mb-3"
+                                 style="width: 300px; height: 300px; object-fit: cover;">
+
+                            <!-- Image Upload Field -->
+                            <div class="mb-2">
+                                {{ form.img_file|add_class:"form-control" }}
+                            </div>
+                        </div>
+
+                        <!-- Right Side - Form Fields -->
+                        <div class="col-md-8">
+                            <div class="row">
+                                <!-- Left Column -->
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Haircut Name</label>
+                                        {{ form.name|add_class:"form-control" }}
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Price - (soums)k</label>
+                                        {{ form.price|add_class:"form-control" }}
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Duration (mins)</label>
+                                        {{ form.duration|add_class:"form-control" }}
+                                    </div>
+                                </div>
+
+                                <!-- Right Column -->
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Barber</label>
+                                        {{ form.barber|add_class:"form-control" }}
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Description</label>
+                                        {{ form.description|add_class:"form-control" }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-dark w-100">
+                            <i class="fas fa-cut"></i> Create Haircut
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Back Link -->
+                <div class="text-center mt-3">
+                    <a href="{% url 'services:haircuts_list' %}" class="text-muted text-decoration-none">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for live image preview -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const input = document.getElementById("id_img_file");
+            const preview = document.getElementById("imagePreview");
+            input.addEventListener("change", function (event) {
+                const [file] = event.target.files;
+                if (file) {
+                    preview.src = URL.createObjectURL(file);
+                }
+            });
+        });
+    </script>
+
+
+    <style>
+        /* Adjust the height of the Bio textarea and disable resizing */
+        textarea {
+            height: 70px !important;
+            resize: none;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const input = document.getElementById("id_img_file");
+            const preview = document.getElementById("imagePreview");
+
+            input.addEventListener("change", function (event) {
+                const [file] = event.target.files;  // get the first file from the FileList
+                if (file) {
+                    // Create a temporary URL for this file and set it as the image source
+                    preview.src = URL.createObjectURL(file);
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

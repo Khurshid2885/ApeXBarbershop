@@ -1,0 +1,84 @@
+{% extends 'admin/general/base-nav.html' %}
+
+{% block title %}ApeX Admin Dashboard{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-5 mb-5"> <!-- Added margin-top and margin-bottom -->
+        <div class="row">
+            <!-- Sidebar Navigation: Extra margin to separate it from dashboard analytics -->
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar py-2" style="margin-right: 30px;">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'services:dashboard' %}">
+                                <i class="bi bi-speedometer2"></i> Overview
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'services:manage_barbers' %}">
+                                <i class="bi bi-people"></i> Manage Barbers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'services:manage_clients' %}">
+                                <i class="bi bi-person-lines-fill"></i> Manage Clients
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'services:manage_appointments' %}">
+                                <i class="bi bi-calendar-check"></i> Appointments
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'services:manage_categories' %}">
+                                <i class="bi bi-scissors"></i> Services
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Dashboard Analytics Area -->
+            <main class="col-md-9 ms-sm-auto px-md-4 py-4">
+                <h1 class="h2">Dashboard Analytics</h1>
+                <hr>
+                <!-- Analytics Cards -->
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Barbers</h5>
+                                <p class="card-text display-6">{{ barbers }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Clients</h5>
+                                <p class="card-text display-6">{{ clients }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Appointments</h5>
+                                <p class="card-text display-6">35</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Revenue</h5>
+                                <p class="card-text display-6">$1,200</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional analytics content can be added here -->
+            </main>
+        </div>
+    </div>
+{% endblock content %}

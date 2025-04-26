@@ -1,0 +1,100 @@
+{% extends 'admin/general/base-nav.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container mt-4 mb-5">
+        <h1 class="mb-4 text-center fw-semibold text-dark">Edit Category: {{ category.name }}</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+
+                            <!-- Main Image Field with Preview -->
+                            <div class="mb-3">
+                                <label for="{{ form.main_image.id_for_label }}" class="form-label fw-semibold">
+                                    Category Image
+                                </label>
+                                <div class="mb-2 text-center">
+                                    {% if category.main_image %}
+                                        <img id="imagePreview" src="{{ category.main_image.url }}" alt="Current Image"
+                                             style="max-width: 200px; max-height: 200px;">
+                                    {% else %}
+                                        <img id="imagePreview" src="#" alt="Image Preview"
+                                             style="display: none; max-width: 200px; max-height: 200px;">
+                                    {% endif %}
+                                </div>
+                                {{ form.main_image|add_class:"form-control" }}
+                                {% if form.main_image.help_text %}
+                                    <div class="form-text text-muted">{{ form.main_image.help_text }}</div>
+                                {% endif %}
+                                {% for error in form.main_image.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Category Name Field (moved below image field) -->
+                            <div class="mb-3">
+                                <label for="{{ form.name.id_for_label }}" class="form-label fw-semibold">
+                                    Category Name
+                                </label>
+                                {{ form.name|add_class:"form-control" }}
+                                {% for error in form.name.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Other Fields -->
+                            {% for field in form %}
+                                {% if field.name not in "main_image,name" %}
+                                    <div class="mb-3">
+                                        <label for="{{ field.id_for_label }}" class="form-label fw-semibold">
+                                            {{ field.label }}
+                                        </label>
+                                        {{ field }}
+                                        {% if field.help_text %}
+                                            <div class="form-text text-muted">{{ field.help_text }}</div>
+                                        {% endif %}
+                                        {% for error in field.errors %}
+                                            <div class="text-danger small">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-dark px-4">Save Changes</button>
+                                <a href="{% url 'services:manage_categories' %}"
+                                   class="btn btn-outline-secondary px-4 ms-2">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image preview functionality for main_image field
+        document.addEventListener('DOMContentLoaded', function () {
+            const imgInput = document.getElementById('id_main_image');
+            const imagePreview = document.getElementById('imagePreview');
+
+            if (imgInput) {
+                imgInput.addEventListener('change', function () {
+                    if (this.files && this.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            imagePreview.src = e.target.result;
+                            imagePreview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column min-vh-100 bg-light">
+        <!-- Hero Section -->
+        <div class="d-flex align-items-center justify-content-center flex-grow-1">
+            <div class="bg-white shadow-sm rounded p-5 text-center w-100 mx-3" style="max-width: 500px;">
+                <h1 class="fw-bold text-dark">{% trans 'Welcome' %}</h1>
+                <p class="mt-3 text-secondary fs-5">{% trans 'Book a barber or choose your favorite haircut effortlessly.' %}</p>
+
+                <div class="mt-4 d-flex gap-3 justify-content-center">
+                    <a href="{% url 'services:haircuts_list' %}"
+                       class="btn btn-dark px-3 py-2">{% trans 'Choose Haircut' %}</a>
+                    <a href="{% url 'services:barbers_list' %}"
+                       class="btn btn-outline-dark px-3 py-2">{% trans 'Choose Barber' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

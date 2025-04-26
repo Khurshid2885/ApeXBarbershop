@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-lg-4">
+                <div class="card border-0 shadow-lg rounded-3">
+                    <div class="card-body text-center p-4">
+
+                        <!-- Profile Image -->
+                        <img src="{{ request.user.profile_photo.url }}"
+                             alt="Profile Image"
+                             class="rounded-circle mb-3 border border-2 border-secondary-subtle"
+                             style="width: 125px; height: 125px; object-fit: contain;">
+
+                        <!-- Username -->
+                        <h5 class="fw-bold text-dark mb-1">
+                            {{ request.user.username }}
+                        </h5>
+
+                        <!-- Full Name -->
+                        <p class="text-muted small mb-1">
+                            {{ request.user.first_name }} {{ request.user.last_name }}
+                        </p>
+
+                        <!-- Email & Phone -->
+                        <p class="text-muted small mb-1">
+                            📧 {{ request.user.email }}
+                        </p>
+                        <p class="text-muted small mb-2">
+                            📞 {{ request.user.phone_number|default:"N/A" }}
+                        </p>
+
+                        <!-- Joined Date -->
+                        <p class="text-muted small">
+                            🗓️ Joined: {{ request.user.date_joined|date:"F d, Y" }}
+                        </p>
+
+                        <!-- Edit Profile Button -->
+                        <a href="{% url 'accounts:profile_edit' %}" class="btn btn-outline-dark btn-sm rounded-pill">
+                            Edit Profile
+                        </a>
+
+                        <div class="text-center mt-2">
+                            <a href="{% url 'services:home' %}" class="text-muted text-decoration-none">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Edit Haircut{% endblock %}
+
+{% block content %}
+    <div class="container mt-3 d-flex justify-content-center">
+        <div class="card shadow-sm border-0 p-4" style="max-width: 800px;">
+            <div class="card-body">
+                <h4 class="text-center text-dark mb-4">
+                    ✂️ Edit Haircut
+                </h4>
+
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <!-- Left Side - Haircut Image -->
+                        <div class="col-md-4 text-center">
+                            {% if form.instance.img_file %}
+                                <img src="{{ form.instance.img_file.url }}" alt="Haircut Image"
+                                     class="rounded img-thumbnail mb-3"
+                                     style="width: 300px; height: 300px; object-fit: cover;">
+                            {% else %}
+                                <img src="https://via.placeholder.com/300" alt="Default Haircut Image"
+                                     class="rounded img-thumbnail mb-3">
+                            {% endif %}
+                            <div class="mb-2">
+                                {{ form.img_file|add_class:"form-control form-control-sm" }}
+                            </div>
+                        </div>
+
+                        <!-- Right Side - Form Fields -->
+                        <div class="col-md-8">
+                            <div class="row g-2">
+                                <!-- Left Column -->
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Haircut Name</label>
+                                        {{ form.name|add_class:"form-control form-control-sm" }}
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Price (soums)</label>
+                                        {{ form.price|add_class:"form-control form-control-sm" }}
+                                    </div>
+                                </div>
+
+                                <!-- Right Column -->
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Duration (mins)</label>
+                                        {{ form.duration|add_class:"form-control form-control-sm" }}
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Barber</label>
+                                        {{ form.barber|add_class:"form-control form-control-sm" }}
+                                    </div>
+                                </div>
+
+                                <!-- Full Width Description -->
+                                <div class="col-12">
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Description</label>
+                                        {{ form.description|add_class:"form-control form-control-sm" }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-dark w-100">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Back Link -->
+                <div class="text-center mt-2">
+                    <a href="{% url 'services:haircuts_list' %}" class="text-muted text-decoration-none">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Adjust the height of the description textarea and disable resizing */
+        textarea {
+            height: 100px !important;
+            resize: none;
+        }
+    </style>
+{% endblock %}

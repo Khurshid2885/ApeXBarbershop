@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Barbers Page{% endblock %}
+
+{% block content %}
+    <div class="container py-4">
+        <!-- Page Heading -->
+        <h2 class="text-center fw-bold mb-4">Our Barbers</h2>
+
+        <!-- "Add Barber" Button (Only for superuser) -->
+        {% if user.is_superuser %}
+            <div class="text-center mb-4">
+                <a href="{% url 'services:barber_create' %}" class="btn btn-dark shadow-sm">
+                    <i class="fas fa-user-plus"></i> Add Barber
+                </a>
+            </div>
+        {% endif %}
+
+        <!-- Barbers Grid -->
+        <div class="row g-3 justify-content-center">
+            {% for barber in barbers %}
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                    <div class="card border-0 shadow-sm h-100">
+
+                        <!-- Barber Image with Rating Badge -->
+                        <div class="position-relative">
+                            <img src="{{ barber.image.url }}"
+                                 alt="{{ barber.user.username }}"
+                                 class="card-img-top"
+                                 style="height: 200px; object-fit: cover;">
+                            <span class="badge bg-dark text-warning position-absolute top-0 end-0 m-1 small">
+                            <i class="fas fa-star"></i> {{ barber.rating }}/5.0
+                        </span>
+                        </div>
+
+                        <!-- Barber Details -->
+                        <div class="card-body text-center d-flex flex-column justify-content-between">
+                            <!-- Name / Username -->
+                            <div>
+                                <h6 class="card-title mb-1 fw-bold">
+                                    {{ barber.user.first_name }} {{ barber.user.last_name }}
+                                </h6>
+                                <p class="text-muted small mb-2">
+                                    @{{ barber.user.username }}
+                                </p>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="mt-auto">
+                                <!-- Primary: Select Barber -->
+                                {% if not user.is_superuser %}
+                                    <a href="#"
+                                       class="btn btn-dark btn-sm mb-2">
+                                        <i class="fas fa-check"></i> Select Barber
+                                    </a>
+                                {% endif %}
+                                <!-- Subtle link: View details -->
+                                <div>
+                                    <a href="{% url 'services:barber_view' barber.id %}"
+                                       class="text-decoration-none text-muted small">
+                                        <i class="fas fa-info-circle"></i> View
+                                    </a>
+                                </div>
+
+                                {% if user.is_superuser %}
+                                    <!-- Superuser Actions (Edit / Delete) -->
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <a href="{% url 'services:barber_edit' barber.id %}"
+                                           class="btn btn-outline-dark btn-sm me-1">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <a href="{% url 'services:barber_delete' barber.id %}"
+                                           class="btn btn-outline-danger btn-sm"
+                                           onclick="return confirm('Are you sure you want to delete this barber?');">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

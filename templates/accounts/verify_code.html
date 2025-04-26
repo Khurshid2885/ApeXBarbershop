@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Verify Code{% endblock %}
+
+{% block content %}
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
+            <h3 class="text-center mb-3">Verify Code</h3>
+            <p class="text-muted text-center">Enter the verification code sent to your email.</p>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-dark w-100">Verify</button>
+            </form>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'accounts:forget_password' %}" class="text-decoration-none text-dark">Resend Code</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

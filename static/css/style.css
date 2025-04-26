@@ -1,0 +1,11 @@
+.service-card {
+    max-width: 280px;
+    margin: auto;
+}
+
+.service-img {
+    height: 180px;
+    object-fit: contain;
+}
+
+
