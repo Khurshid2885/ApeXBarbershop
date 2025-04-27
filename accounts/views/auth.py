@@ -15,7 +15,7 @@ def register_view(request):
             user = form.save()
 
             # Adding to Client Group by Default
-            client_group = Group.objects.get(name="services")
+            client_group = Group.objects.get(name="client")
             user.groups.add(client_group)
 
             login(request, user)
