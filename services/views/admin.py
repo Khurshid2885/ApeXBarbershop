@@ -63,7 +63,7 @@ def barber_edit(request, barber_id):
 
 
 @permission_required("services.delete_barberprofile", raise_exception=True)
-def barber_delete(request, barber_id):
+def barber_delete(barber_id):
     barber = BarberProfile.objects.get(id=barber_id)
     barber.delete()
 

@@ -12,6 +12,9 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ["username", "first_name", "last_name", "email", "phone_number", "profile_photo", "password"]
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -34,7 +37,7 @@ class RegisterForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=10)
-    password = forms.CharField(max_length=10)
+    password = forms.CharField(max_length=10, widget=forms.PasswordInput())
 
     def custom_login(self, request):
         username = self.cleaned_data.get("username")
