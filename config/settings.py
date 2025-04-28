@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+
 from django.utils.translation import gettext_lazy
 from decouple import config
 
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # For better visualization of numbers: 4500000 --> 4,500,000.
+    'django.contrib.humanize',
 
     # local
     'accounts',

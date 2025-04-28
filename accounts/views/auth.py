@@ -3,7 +3,6 @@ from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 
 from accounts.forms import LoginForm, RegisterForm
-from accounts.models import BarberProfile
 
 
 def register_view(request):

@@ -1,4 +1,5 @@
 {% extends 'admin/general/base-nav.html' %}
+{% load humanize %}
 
 {% block content %}
     <div class="container mt-4 mb-5">
@@ -43,11 +44,18 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 rounded-circle p-2 mb-2">
                             <i class="bi bi-currency-exchange fs-4 text-success"></i>
                         </div>
-                        <h4 class="fw-bold text-success mb-0">{{ context.average_price|floatformat:3 }} UZS</h4>
+                        <h4 class="fw-bold text-success mb-0">
+                            {% if context.average_price|floatformat:0 %}
+                                {{ context.average_price|add:"000"|intcomma }} UZS
+                            {% else %}
+                                {{ context.average_price|floatformat:3|intcomma }} UZS
+                            {% endif %}
+                        </h4>
                         <p class="text-muted small mb-0">Average Price</p>
                     </div>
                 </div>
             </div>
+
 
             <!-- Average Duration -->
             <div class="col-md-4">
@@ -56,7 +64,7 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10 rounded-circle p-2 mb-2">
                             <i class="bi bi-clock fs-4 text-warning"></i>
                         </div>
-                        <h4 class="fw-bold text-warning mb-0">{{ context.average_duration|floatformat:1 }}</h4>
+                        <h4 class="fw-bold text-warning mb-0">{{ context.average_duration|floatformat:0 }}</h4>
                         <p class="text-muted small mb-0">Average Minutes</p>
                     </div>
                 </div>

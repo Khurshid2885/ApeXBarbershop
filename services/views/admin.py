@@ -1,3 +1,5 @@
+from decimal import Decimal, ROUND_HALF_UP
+
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.models import Group
 from django.db.models.aggregates import Sum, Avg
@@ -81,7 +83,7 @@ def barber_delete(barber_id):
 
 # Main Page
 @superadmin_required
-def dashboard(request):
+def admin_dashboard(request):
     # Getting Group members
     barbers = len(Group.objects.get(name="barber").user_set.all())
     clients = len(Group.objects.get(name="client").user_set.all())
@@ -132,6 +134,16 @@ def reports_list(request):
 @superadmin_required
 def settings(request):
     return render(request, "admin/general/settings.html")
+
+
+@superadmin_required
+def admin_profile_view(request):
+    return render(request, "admin/general/profile.html")
+
+
+@superadmin_required
+def admin_profile_edit(request):
+    return render(request, "admin/general/profile-edit.html")
 
 
 @superadmin_required
@@ -219,7 +231,16 @@ def manage_category_overview(request, category_id):
 
     # Average
     average_duration = category.services.aggregate(Avg("duration"))["duration__avg"] or 0
-    average_price = category.services.aggregate(Avg("price"))["price__avg"] or 0
+    raw_avg = category.services.aggregate(price_avg=Avg("price"))["price_avg"] or 0.0
+
+    # Average Price - Logic
+    if raw_avg < 1000:
+        actual_uzs = raw_avg * 1000
+    else:
+        actual_uzs = raw_avg
+
+    # Round to whole-UZS:
+    average_price = int(round(actual_uzs))
 
     context = {
         "category": category,
