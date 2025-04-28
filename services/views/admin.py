@@ -190,22 +190,26 @@ def manage_appointments(request):
 
 
 @superadmin_required
-def appointment_view(request):
-    return render(request, "admin/appointments/appointment-view.html")
+def admin_appointment_view(request, appointment_id):
+    appt = get_object_or_404(Appointment, id=appointment_id)
+    return render(request, "admin/appointments/appointment-view.html", {"appt": appt})
 
 
 @superadmin_required
-def appointment_create(request):
+def admin_appointment_create(request):
     return render(request, "admin/appointments/appointment-create.html")
 
 
 @superadmin_required
-def appointment_edit(request, appointment_id):
-    return render(request, "admin/appointments/appointment-edit.html")
+def admin_appointment_edit(request, appointment_id):
+    appt = get_object_or_404(Appointment, id=appointment_id)
+    return render(request, "admin/appointments/appointment-edit.html", {"appt": appt})
 
 
 @superadmin_required
-def appointment_delete(request, appointment_id):
+def admin_appointment_delete(request, appointment_id):
+    appt = get_object_or_404(Appointment, id=appointment_id)
+    appt.delete()
     return redirect("services:manage_appointments")
 
 

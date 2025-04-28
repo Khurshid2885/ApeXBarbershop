@@ -6,12 +6,12 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="fw-bold">Manage Appointments</h2>
-            <a href="{% url 'services:appointment_create' %}" class="btn btn-success">+ New Appointment</a>
+            <a href="{% url 'services:admin_appointment_create' %}" class="btn btn-success">+ New Appointment</a>
         </div>
 
         <div class="d-flex justify-content-start gap-3 mb-4">
             <!-- Go to Dashboard Button -->
-            <a href="{% url 'services:dashboard' %}" class="btn btn-outline-primary">
+            <a href="{% url 'services:admin_dashboard' %}" class="btn btn-outline-primary">
                 <i class="bi bi-house-door"></i> Go to Dashboard
             </a>
         </div>
@@ -49,14 +49,19 @@
                                 <td>{{ appointment.date }}</td>
                                 <td>{{ appointment.time }}</td>
                                 <td>
-                                    <span class="badge {% if appointment.status == 'Completed' %}bg-success{% elif appointment.status == 'Pending' %}bg-warning text-dark{% else %}bg-danger{% endif %}">
+                                    <span class="badge {% if appointment.status == 'completed' %}
+                                    bg-success{% elif appointment.status == 'pending' %}
+                                    bg-warning text-dark{% else %}
+                                    bg-danger{% endif %}">
                                         {{ appointment.status }}
                                     </span>
                                 </td>
                                 <td>
-                                    <a href="{% url 'services:appointment_edit' appointment.id %}"
+                                    <a href="{% url 'services:admin_appointment_view' appointment.id %}"
+                                       class="btn btn-sm btn-outline-primary">View</a>
+                                    <a href="{% url 'services:admin_appointment_edit' appointment.id %}"
                                        class="btn btn-sm btn-outline-primary">Edit</a>
-                                    <a href="{% url 'services:appointment_delete' appointment.id %}"
+                                    <a href="{% url 'services:admin_appointment_delete' appointment.id %}"
                                        class="btn btn-sm btn-outline-danger">Delete</a>
                                 </td>
                             </tr>

@@ -1,7 +1,158 @@
 {% extends 'barber/general/base-nav.html' %}
 
+{% block title %}Barber Dashboard{% endblock %}
+
 {% block content %}
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-lg-2 d-none d-lg-block bg-light sidebar py-3 rounded shadow-sm">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link active d-flex align-items-center"
+                           href="{% url 'services:barber_dashboard' %}">
+                            <i class="bi bi-speedometer2 me-2"></i> Overview
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link d-flex align-items-center" href="{% url 'services:barber_services' %}">
+                            <i class="bi bi-scissors me-2"></i> Services
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link d-flex align-items-center" href="{% url 'services:barber_appointments' %}">
+                            <i class="bi bi-calendar-check me-2"></i> Appointments
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link d-flex align-items-center" href="{% url 'services:barber_clients' %}">
+                            <i class="bi bi-people-fill me-2"></i> Clients
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="{% url 'services:barber_profile_view' %}">
+                            <i class="bi bi-person-circle me-2"></i> Profile
+                        </a>
+                    </li>
+                </ul>
+            </nav>
 
-    <h1>This is Barber's Dashboard</h1>
+            <!-- Main Content -->
+            <main class="col-lg-9 ms-auto px-4">
+                <!-- Greeting & Last Login -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h4 mb-0">Hello, {{ user.first_name }}!</h2>
+                    <span class="text-muted">
+                        <i class="bi bi-calendar2-event-fill me-1"> Today: </i> {% now "M d, Y" %}
+                    </span>
+                </div>
 
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card shadow-sm rounded">
+                            <div class="card-body text-center">
+                                <i class="bi bi-cash fs-2 text-success mb-3"></i> <!-- Total Revenue Icon (Green) -->
+                                <h6 class="text-muted">Total Revenue</h6>
+                                <h3 class="fw-bold">{{ total_revenue }} UZS</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm rounded">
+                            <div class="card-body text-center">
+                                <i class="bi bi-card-checklist fs-2 text-primary mb-3"></i>
+                                <!-- Total Services Icon (Blue) -->
+                                <h6 class="text-muted">Total Services</h6>
+                                <h3 class="fw-bold">{{ total_services }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm rounded">
+                            <div class="card-body text-center">
+                                <i class="bi bi-calendar-event fs-2 text-warning mb-3"></i>
+                                <!-- Total Appointments Icon (Yellow) -->
+                                <h6 class="text-muted">Total Appointments</h6>
+                                <h3 class="fw-bold">{{ total_appointments }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Chart -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">This Month’s Revenue</h5>
+                                <canvas id="miniRevenueChart" height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Appointments (preview only) -->
+                <div class="card mb-4 shadow-sm rounded">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Upcoming Appointments</h5>
+                        <a href="{% url 'services:barber_appointments' %}" class="btn btn-sm btn-outline-primary">
+                            View All
+                        </a>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Client</th>
+                                <th>Service</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for appt in upcoming_appointments|slice:":5" %}
+                                <tr>
+                                    <td>{{ appt.date }}</td>
+                                    <td>{{ appt.time }}</td>
+                                    <td>{{ appt.customer.get_full_name }}</td>
+                                    <td>{{ appt.service.name }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ appt.status_badge }}">{{ appt.get_status_display }}</span>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-3 text-muted">
+                                        No upcoming appointments.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    {% block extra_js %}
+        <script>
+            // Mini revenue sparkline (Chart.js)
+            const miniCtx = document.getElementById('miniRevenueChart').getContext('2d');
+            new Chart(miniCtx, {
+                type: 'line',
+                data: {{ mini_revenue_data|safe }},
+                options: {
+                    responsive: true,
+                    plugins: {legend: {display: false}},
+                    scales: {
+                        x: {display: false},
+                        y: {display: false}
+                    },
+                    elements: {point: {radius: 0}, line: {tension: 0.3}}
+                }
+            });
+        </script>
+    {% endblock %}
 {% endblock %}
