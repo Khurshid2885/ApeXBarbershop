@@ -1,0 +1,128 @@
+{% extends 'admin/general/base-nav.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+    <div class="container mt-3 d-flex justify-content-center">
+        <div class="card shadow-sm border-0 p-3" style="max-width: 650px;">
+            <div class="card-body">
+                <h4 class="text-center text-dark mb-3">
+                    👤 Edit Profile
+                </h4>
+
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <!-- Left Side - Profile Image -->
+                        <div class="col-md-4 text-center">
+                            {% if form.instance.profile_photo %}
+                                <img src="{{ form.instance.profile_photo.url }}" alt="Profile Image"
+                                     class="rounded img-thumbnail mb-3"
+                                     style="width: 150px; height: 150px; object-fit: cover;">
+                            {% else %}
+                                <img src="https://via.placeholder.com/150" alt="Default Image"
+                                     class="rounded img-thumbnail mb-3">
+                            {% endif %}
+                            <div class="mb-2">
+                                {{ form.profile_photo|add_class:"form-control form-control-sm" }}
+                                {% if form.profile_photo.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.profile_photo.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Right Side - Form Fields -->
+                        <div class="col-md-8">
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Username</label>
+                                        {{ form.username|add_class:"form-control form-control-sm" }}
+                                        {% if form.username.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.username.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">First Name</label>
+                                        {{ form.first_name|add_class:"form-control form-control-sm" }}
+                                        {% if form.first_name.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.first_name.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Email</label>
+                                        {{ form.email|add_class:"form-control form-control-sm" }}
+                                        {% if form.email.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.email.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Last Name</label>
+                                        {{ form.last_name|add_class:"form-control form-control-sm" }}
+                                        {% if form.last_name.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.last_name.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label text-dark fw-bold">Phone</label>
+                                        {{ form.phone_number|add_class:"form-control form-control-sm" }}
+                                        {% if form.phone_number.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.phone_number.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-dark w-100">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-2">
+                    <a href="{% url 'services:admin_profile_view' %}" class="text-muted text-decoration-none">
+                        <i class="fas fa-arrow-left"></i> Cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        textarea {
+            height: 70px !important;
+            resize: none;
+        }
+    </style>
+{% endblock %}

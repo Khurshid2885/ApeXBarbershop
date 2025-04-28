@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
-{# Override the base navbar with a generalized admin navbar #}
 {% block nav %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
             <!-- Admin Branding -->
-            <a class="navbar-brand fw-bold" href="{% url 'services:dashboard' %}">ApeX Admin</a>
+            <a class="navbar-brand fw-bold" href="{% url 'services:admin_dashboard' %}">ApeX Admin</a>
             <!-- Toggler for Mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar"
                     aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +14,7 @@
             <div class="collapse navbar-collapse" id="adminNavbar">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'services:dashboard' %}">Dashboard</a>
+                        <a class="nav-link" href="{% url 'services:admin_dashboard' %}">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'services:users_list' %}">Users</a>
@@ -27,11 +26,17 @@
                         <a class="nav-link" href="{% url 'services:settings' %}">Settings</a>
                     </li>
                 </ul>
+                <!-- Right-side: Profile & Logout -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:logout_view' %}"
+                        <a class="nav-link" href="{% url 'services:admin_profile_view' %}">
+                            <i class="bi bi-person-circle"></i> Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="{% url 'accounts:logout_view' %}"
                            onclick="return confirm('Are you sure you want to log out?');">
-                            Logout
+                            <i class="bi bi-box-arrow-right"></i> Logout
                         </a>
                     </li>
                 </ul>

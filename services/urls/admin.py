@@ -1,8 +1,9 @@
 from django.urls import path
 
-from services.views.admin import dashboard, manage_barbers, manage_clients, manage_categories, manage_appointments, \
+from services.views.admin import admin_dashboard, manage_barbers, manage_clients, manage_categories, \
+    manage_appointments, \
     users_list, reports_list, settings, user_edit, user_delete, user_view, manage_barber_view, barber_create, \
-    barber_edit, \
+    barber_edit, admin_profile_view, admin_profile_edit, \
     barber_delete, client_view, \
     client_edit, client_delete, \
     manage_service_view, category_edit, \
@@ -11,10 +12,14 @@ from services.views.admin import dashboard, manage_barbers, manage_clients, mana
 
 urlpatterns = [
     # Main - Navbar
-    path("dashboard/", dashboard, name="dashboard"),
+    path("dashboard/", admin_dashboard, name="admin_dashboard"),
     path("users/", users_list, name="users_list"),
     path("reports/", reports_list, name="reports_list"),
     path("settings/", settings, name="settings"),
+
+    # Profile
+    path("profile/", admin_profile_view, name="admin_profile_view"),
+    path("profile/edit", admin_profile_edit, name="admin_profile_edit"),
 
     # Management
     path("manage-barbers/", manage_barbers, name="manage_barbers"),

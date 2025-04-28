@@ -20,7 +20,12 @@ def superadmin_blocked(view_func):
 
 
 def barber_required(view_func):
-    pass
+    def wrapper(request, *args, **kwargs):
+        if not request.user.groups.filter(name="barber").exists():
+            raise PermissionDenied
+        return view_func(request, *args, **kwargs)
+
+    return wrapper
 
 
 def barber_blocked(view_func):

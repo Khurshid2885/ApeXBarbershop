@@ -1,4 +1,4 @@
-{% extends 'barber/general/base-nav.html' %}
+{% extends 'admin/general/base-nav.html' %}
 {% load static %}
 
 {% block title %}My Profile{% endblock %}
@@ -40,12 +40,13 @@
                         </p>
 
                         <!-- Edit Profile Button -->
-                        <a href="{% url 'services:barber_profile_edit' %}" class="btn btn-outline-dark btn-sm rounded-pill">
+                        <a href="{% url 'services:admin_profile_edit' %}"
+                           class="btn btn-outline-dark btn-sm rounded-pill">
                             Edit Profile
                         </a>
 
                         <div class="text-center mt-2">
-                            <a href="{% url 'services:barber_dashboard' %}" class="text-muted text-decoration-none">
+                            <a href="{% url 'services:admin_dashboard' %}" class="text-muted text-decoration-none">
                                 <i class="fas fa-arrow-left"></i> Back
                             </a>
                         </div>
