@@ -1,7 +1,8 @@
 from django.urls import path
 from services.views import barber_dashboard, barber_schedule, barber_appointments, \
     barber_clients, barber_services, \
-    barber_settings, barber_profile_view, barber_profile_edit
+    barber_settings, barber_profile_view, barber_profile_edit, barber_appointment_edit, barber_appointment_view, \
+    barber_appointment_delete
 
 urlpatterns = [
     # Main - Navbar
@@ -15,4 +16,9 @@ urlpatterns = [
     path("profile/", barber_profile_view, name="barber_profile_view"),
     path("profile/edit", barber_profile_edit, name="barber_profile_edit"),
     path("settings/", barber_settings, name="barber_settings"),
+
+    # Appointments
+    path("appointments/<int:appt_id>", barber_appointment_view, name="barber_appointment_view"),
+    path("appointments/<int:appt_id>/edit", barber_appointment_edit, name="barber_appointment_edit"),
+    path("appointments/<int:appt_id>/delete", barber_appointment_delete, name="barber_appointment_delete"),
 ]
