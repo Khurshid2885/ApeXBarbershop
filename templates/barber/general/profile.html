@@ -11,7 +11,7 @@
                     <div class="card-body text-center p-4">
 
                         <!-- Profile Image -->
-                        <img src="{{ request.user.profile_photo.url }}"
+                        <img src="{{ request.user.user_barber.image.url }}"
                              alt="Profile Image"
                              class="rounded-circle mb-3 border border-2 border-secondary-subtle"
                              style="width: 125px; height: 125px; object-fit: contain;">
@@ -40,7 +40,8 @@
                         </p>
 
                         <!-- Edit Profile Button -->
-                        <a href="{% url 'services:barber_profile_edit' %}" class="btn btn-outline-dark btn-sm rounded-pill">
+                        <a href="{% url 'services:barber_profile_edit' %}"
+                           class="btn btn-outline-dark btn-sm rounded-pill">
                             Edit Profile
                         </a>
 

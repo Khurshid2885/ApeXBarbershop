@@ -94,7 +94,7 @@
                     {% for appt in appointments %}
                         <tr>
                             <td class="text-nowrap fw-medium">{{ appt.date }}</td>
-                            <td class="text-nowrap">{{ appt.customer.get_full_name }}</td>
+                            <td class="text-nowrap">{{ appt.client.get_full_name }}</td>
                             <td class="text-nowrap">{{ appt.service.name }}</td>
                             <td class="text-nowrap">{{ appt.barber.user.get_full_name }}</td>
                             <td class="text-center">
@@ -137,5 +137,9 @@
             {#  {% paginate appointments %}#}
             {#</div>#}
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
 {% endblock %}
