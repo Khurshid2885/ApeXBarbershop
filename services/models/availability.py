@@ -8,3 +8,6 @@ class Availability(BaseModel):
     barber = models.ForeignKey(BarberProfile, on_delete=models.CASCADE, related_name="availability")
     date = models.DateField()
     time = models.TimeField()
+
+    class Meta:
+        db_table = 'availability'

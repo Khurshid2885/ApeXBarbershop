@@ -18,3 +18,4 @@ class BarberProfile(BaseModel):
 
     class Meta:
         ordering = "-rating",
+        db_table = 'barberProfile'

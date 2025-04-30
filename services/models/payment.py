@@ -9,3 +9,6 @@ class Payment(BaseModel):
     method = models.CharField(max_length=10, choices=Method, default=Method.CASH)
     status = models.CharField(max_length=10, choices=Status, default=Status.PENDING)
     transaction_id = models.IntegerField(unique=True, blank=True, null=True)
+
+    class Meta:
+        db_table = 'payment'

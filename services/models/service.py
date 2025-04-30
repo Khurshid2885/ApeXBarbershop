@@ -14,6 +14,7 @@ class ServiceCategory(models.Model):
 
     class Meta:
         ordering = ["name"]
+        db_table = 'serviceCategory'
 
 
 class Service(BaseModel):
@@ -33,3 +34,4 @@ class Service(BaseModel):
 
     class Meta:
         ordering = ["-price"]
+        db_table = 'service'

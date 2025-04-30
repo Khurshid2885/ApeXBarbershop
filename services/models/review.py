@@ -9,3 +9,6 @@ class Review(BaseModel):
     barber = models.ForeignKey(BarberProfile, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField()
     comment = models.TextField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'review'
