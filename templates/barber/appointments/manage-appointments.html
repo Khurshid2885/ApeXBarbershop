@@ -82,10 +82,10 @@
                 <table class="table table-hover table-striped align-middle mb-0">
                     <thead class="table-light">
                     <tr>
+                        <th scope="col" class="text-nowrap">Date</th>
                         <th scope="col" class="text-nowrap">Time</th>
                         <th scope="col" class="text-nowrap">Client</th>
                         <th scope="col" class="text-nowrap">Service</th>
-                        <th scope="col" class="text-nowrap">Barber</th>
                         <th scope="col" class="text-center text-nowrap">Status</th>
                         <th scope="col" class="text-center text-nowrap">Actions</th>
                     </tr>
@@ -94,9 +94,9 @@
                     {% for appt in appointments %}
                         <tr>
                             <td class="text-nowrap fw-medium">{{ appt.date }}</td>
+                            <td class="text-nowrap fw-medium">{{ appt.time }}</td>
                             <td class="text-nowrap">{{ appt.client.get_full_name }}</td>
                             <td class="text-nowrap">{{ appt.service.name }}</td>
-                            <td class="text-nowrap">{{ appt.barber.user.get_full_name }}</td>
                             <td class="text-center">
               <span class="badge bg-{{ appt.status_badge }}">
                 {{ appt.get_status_display }}

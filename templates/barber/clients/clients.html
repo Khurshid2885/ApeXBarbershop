@@ -1,7 +1,51 @@
 {% extends 'barber/general/base-nav.html' %}
 
 {% block content %}
+    <div class="container mt-4 mb-5">
+        <h2 class="mb-4 text-dark fw-bold">💇 Clients & Appointments</h2>
 
-    <h1>Clients List</h1>
+        <div class="d-flex justify-content-start gap-3 mb-4">
+            <a href="{% url 'services:barber_dashboard' %}" class="btn btn-outline-primary">
+                <i class="bi bi-house-door"></i> Back to Dashboard
+            </a>
+        </div>
 
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Client</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Total Appointments</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for client in clients %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ client.first_name }} {{ client.last_name }}</td>
+                            <td>{{ client.email }}</td>
+                            <td>{{ client.phone_number|default:"N/A" }}</td>
+                            <td>{{ client.appointments.count }}</td>
+                            <td>
+                                <a href="{% url 'services:barber_appointments_client' client.id %}"
+                                   class="btn btn-sm btn-outline-secondary">
+                                    View Appointments
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No clients with appointments yet.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -14,10 +14,10 @@
                 <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
-                        <!-- Left Side - Profile Image -->
+                        <!-- Left Side - Profile Image & Experience -->
                         <div class="col-md-4 text-center">
-                            {% if form.instance.profile_photo %}
-                                <img src="{{ form.instance.profile_photo.url }}" alt="Profile Image"
+                            {% if barber_form.instance.image %}
+                                <img src="{{ barber_form.instance.image.url }}" alt="Profile Image"
                                      class="rounded img-thumbnail mb-3"
                                      style="width: 150px; height: 150px; object-fit: cover;">
                             {% else %}
@@ -25,27 +25,28 @@
                                      class="rounded img-thumbnail mb-3">
                             {% endif %}
                             <div class="mb-2">
-                                {{ form.profile_photo|add_class:"form-control form-control-sm" }}
-                                {% if form.profile_photo.errors %}
+                                {{ barber_form.image|add_class:"form-control form-control-sm" }}
+                                {% if barber_form.image.errors %}
                                     <div class="text-danger">
-                                        {% for error in form.profile_photo.errors %}
+                                        {% for error in barber_form.image.errors %}
                                             <p>{{ error }}</p>
                                         {% endfor %}
                                     </div>
                                 {% endif %}
                             </div>
+
                         </div>
 
-                        <!-- Right Side - Form Fields -->
+                        <!-- Right Side - Form Fields & Bio -->
                         <div class="col-md-8">
                             <div class="row g-2">
                                 <div class="col-md-6">
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">Username</label>
-                                        {{ form.username|add_class:"form-control form-control-sm" }}
-                                        {% if form.username.errors %}
+                                        {{ user_form.username|add_class:"form-control form-control-sm" }}
+                                        {% if user_form.username.errors %}
                                             <div class="text-danger">
-                                                {% for error in form.username.errors %}
+                                                {% for error in user_form.username.errors %}
                                                     <p>{{ error }}</p>
                                                 {% endfor %}
                                             </div>
@@ -53,10 +54,10 @@
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">First Name</label>
-                                        {{ form.first_name|add_class:"form-control form-control-sm" }}
-                                        {% if form.first_name.errors %}
+                                        {{ user_form.first_name|add_class:"form-control form-control-sm" }}
+                                        {% if user_form.first_name.errors %}
                                             <div class="text-danger">
-                                                {% for error in form.first_name.errors %}
+                                                {% for error in user_form.first_name.errors %}
                                                     <p>{{ error }}</p>
                                                 {% endfor %}
                                             </div>
@@ -64,24 +65,38 @@
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">Email</label>
-                                        {{ form.email|add_class:"form-control form-control-sm" }}
-                                        {% if form.email.errors %}
+                                        {{ user_form.email|add_class:"form-control form-control-sm" }}
+                                        {% if user_form.email.errors %}
                                             <div class="text-danger">
-                                                {% for error in form.email.errors %}
+                                                {% for error in user_form.email.errors %}
                                                     <p>{{ error }}</p>
                                                 {% endfor %}
                                             </div>
                                         {% endif %}
+                                    </div>
+                                    <!-- Full-width Bio Field -->
+                                    <div class="col-md-12">
+                                        <div class="mb-2">
+                                            <label class="form-label text-dark fw-bold">Bio</label>
+                                            {{ barber_form.bio|add_class:"form-control form-control-sm w-100" }}
+                                            {% if barber_form.bio.errors %}
+                                                <div class="text-danger">
+                                                    {% for error in barber_form.bio.errors %}
+                                                        <p>{{ error }}</p>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">Last Name</label>
-                                        {{ form.last_name|add_class:"form-control form-control-sm" }}
-                                        {% if form.last_name.errors %}
+                                        {{ user_form.last_name|add_class:"form-control form-control-sm" }}
+                                        {% if user_form.last_name.errors %}
                                             <div class="text-danger">
-                                                {% for error in form.last_name.errors %}
+                                                {% for error in user_form.last_name.errors %}
                                                     <p>{{ error }}</p>
                                                 {% endfor %}
                                             </div>
@@ -89,15 +104,27 @@
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label text-dark fw-bold">Phone</label>
-                                        {{ form.phone_number|add_class:"form-control form-control-sm" }}
-                                        {% if form.phone_number.errors %}
+                                        {{ user_form.phone_number|add_class:"form-control form-control-sm" }}
+                                        {% if user_form.phone_number.errors %}
                                             <div class="text-danger">
-                                                {% for error in form.phone_number.errors %}
+                                                {% for error in user_form.phone_number.errors %}
                                                     <p>{{ error }}</p>
                                                 {% endfor %}
                                             </div>
                                         {% endif %}
                                     </div>
+                                    <div class="mb-2 text-start">
+                                        <label class="form-label text-dark fw-bold">Experience Years</label>
+                                        {{ barber_form.experience_years|add_class:"form-control form-control-sm" }}
+                                        {% if barber_form.experience_years.errors %}
+                                            <div class="text-danger">
+                                                {% for error in barber_form.experience_years.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

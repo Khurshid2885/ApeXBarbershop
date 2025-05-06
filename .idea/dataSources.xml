@@ -1,19 +1,12 @@
-<xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="barbershop@localhost" uuid="ebca98e-58d3-4f9b-bccf-082bc165a58a">
-      <database>
-        <main-source-source="LOCAL" name="barbershop@localhost" uuid="ebca98e-58d3-4f9b-bccf-082bc165a58a">
-          <driver>
-            <url>jdbc:mysql://driver-ref</url>
-            <synchronize>true</synchronize>
-            <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-            <id>bc-urldbc>org.postgresql.Driver</id>
-            <url>jdbc:postgresql://localhost:5432/barbershop</url>
-          </driver>
-          <working-dir>PROJECT_FILE_DIR$/working-dir</working-dir>
-        </main-source-source>
-      </database>
+    <data-source source="LOCAL" name="barbershop@localhost" uuid="ed07d042-85c3-4afc-90ae-a3c66cb4f897">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/barbershop</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>

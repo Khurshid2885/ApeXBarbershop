@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import Group
 
-from services.models import Service
+from services.models import Service, Appointment
 from accounts.models import CustomUser, BarberProfile
 from services.models.service import ServiceCategory
 
@@ -81,8 +81,8 @@ class BarberEditForm(forms.ModelForm):
 
     # Select services
     services = forms.ModelMultipleChoiceField(
-        queryset=Service.objects.all(),  # Get all services
-        widget=forms.SelectMultiple(attrs={'class': 'form-control', 'size': '5'}),  # Makes selection taller
+        queryset=Service.objects.all(),
+        widget=forms.SelectMultiple(attrs={'class': 'form-control', 'size': '5'}),
         required=False
     )
 
@@ -185,3 +185,10 @@ class ServiceEditForm(forms.ModelForm):
     class Meta:
         model = Service
         fields = ["img_file", "name", "description", "price", "duration"]
+
+
+# It is for Barbers-Only
+class BarberAppointmentEditForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ['status']
