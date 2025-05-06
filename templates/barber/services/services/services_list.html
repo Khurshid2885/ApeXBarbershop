@@ -1,0 +1,50 @@
+{% extends 'barber/general/base-nav.html' %}
+
+{% block content %}
+    <h1 class="mb-4">{{ category.name }} List: </h1>
+
+    <!-- Horizontal scroll wrapper -->
+    <div
+            class="d-flex flex-row flex-nowrap gap-4 pb-2"
+            style="overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;"
+    >
+        {% for service in services %}
+            <div class="card flex-shrink-0 shadow-sm" style="width: 220px;">
+                <img
+                        src="{{ service.img_file.url }}"
+                        class="card-img-top"
+                        alt="{{ service.name }}"
+                        style="width: 100%; height: 200px; object-fit: cover;"
+                >
+                <div class="card-body p-2">
+                    <h6 class="card-title mb-1">{{ service.name }}</h6>
+                    <p class="card-text text-muted small mb-2">{{ service.category.name }}</p>
+                    <a
+                            href="{% url 'services:barber_service_view' service.id %}"
+                            class="btn btn-sm btn-primary w-100"
+                    >View</a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="alert alert-info text-center w-100">
+                No services available.
+            </div>
+        {% endfor %}
+    </div>
+    <br>
+    <a href="javascript:void(0);" onclick="goBack()" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i> Back to Categories
+    </a>
+
+    <script>
+        function goBack() {
+            if (document.referrer) {
+                window.history.back();  // Go back if there is a referrer
+            } else {
+                window.location.href = "{% url 'services:barber_categories' %}";  // Fallback URL
+            }
+        }
+    </script>
+    <br>
+    <br>
+{% endblock %}

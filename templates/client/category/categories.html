@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="mb-4 text-center">
+            <h1 class="display-5">Our Categories</h1>
+            <p class="text-muted">Browse through all the services we offer</p>
+        </div>
+
+        <div class="row g-4">
+            {% for category in categories %}
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="{{ category.get_absolute_url }}" class="text-decoration-none text-dark">
+                        <div class="card h-100 shadow-sm border-0 hover-shadow">
+                            {% comment %} Replace with real images or icons per category {% endcomment %}
+                            <img src="{{ category.main_image.url }}"
+                                 class="card-img-top" alt="{{ category.name }}"
+                                 onerror="this.onerror=null;this.src='{% static 'images/categories/default.jpg' %}';">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ category.name }}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <p class="text-center text-muted">No categories available at the moment.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <style>
+        .hover-shadow:hover {
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+            transform: translateY(-2px);
+            transition: all .2s ease-in-out;
+        }
+    </style>
+{% endblock %}

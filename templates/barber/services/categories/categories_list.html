@@ -1,0 +1,39 @@
+{% extends 'barber/general/base-nav.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h4 class="mb-3">Service Categories</h4>
+
+        <div class="d-flex justify-content-start gap-3 mb-4">
+            <a href="{% url 'services:barber_dashboard' %}" class="btn btn-outline-primary">
+                <i class="bi bi-house-door"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+            {% for category in categories %}
+                <div class="card flex-shrink-0 shadow-sm" style="width: 220px;">
+                    <img
+                            src="{{ category.main_image.url }}"
+                            class="card-img-top"
+                            alt="{{ category.name }}"
+                            style="width: 100%; height: 200px; object-fit: cover;"
+                    >
+                    <div class="card-body p-2">
+                        <h6 class="card-title mb-1">{{ category.name }}</h6>
+                        <p class="card-text text-muted small mb-2">{{ category.name }}</p>
+                        <a
+                                href="{% url 'services:barber_services' category.id %}"
+                                class="btn btn-sm btn-primary w-100"
+                        >View</a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info text-center small">No categories found.</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br><br>
+{% endblock %}

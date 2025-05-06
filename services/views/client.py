@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 
 from services.models import Service
 from accounts.models import BarberProfile
+from services.models.service import ServiceCategory
 from services.utils import client_required, superadmin_blocked, barber_blocked
 
 
@@ -33,16 +34,16 @@ def barber_view(request, barber_id):
 
 @superadmin_blocked
 @barber_blocked
-def haircuts_list(request):
-    haircuts = Service.objects.all()
-    return render(request, "client/haircuts.html", {"haircuts": haircuts})
+def categories_list(request):
+    categories = ServiceCategory.objects.all()
+    return render(request, "client/category/categories.html", {"categories": categories})
 
 
 @superadmin_blocked
 @barber_blocked
-def haircut_view(request, haircut_id):
-    haircut = get_object_or_404(Service, id=haircut_id)
-    return render(request, "client/haircut_view.html", {"haircut": haircut})
+def category_view(request, category_id):
+    category = get_object_or_404(ServiceCategory, id=category_id)
+    return render(request, "client/category/category_view.html", {"category": category})
 
 
 @client_required

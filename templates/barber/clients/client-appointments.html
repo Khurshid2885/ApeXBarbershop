@@ -1,0 +1,56 @@
+{% extends 'barber/general/base-nav.html' %}
+
+{% block content %}
+    <div class="container mt-4 mb-5">
+        <h2 class="mb-4 text-dark fw-bold">📋 Appointments with {{ client.first_name }} {{ client.last_name }}</h2>
+
+        <div class="d-flex justify-content-start gap-3 mb-4">
+            <a href="{% url 'services:barber_clients' %}" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left"></i> Back to Clients
+            </a>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                {% if appointments %}
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Service</th>
+                            <th>Price</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for appointment in appointments %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ appointment.service.name }}</td>
+                                <td>{{ appointment.service.price }} UZS</td>
+                                <td>{{ appointment.date|date:"M d, Y" }}</td>
+                                <td>{{ appointment.time|time:"H:i" }}</td>
+                                <td>
+                                    {% if appointment.status == "completed" %}
+                                        <span class="badge bg-success">Completed</span>
+                                    {% elif appointment.status == "cancelled" %}
+                                        <span class="badge bg-danger">Cancelled</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">{{ appointment.status|capfirst }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ appointment.notes|default:"—" }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted">This client has no appointments yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

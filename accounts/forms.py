@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 
-from accounts.models import Code
+from accounts.models import Code, BarberProfile
 from accounts.models import CustomUser
 
 
@@ -125,3 +125,14 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ["username", "first_name", "last_name", "email", "phone_number", "profile_photo"]
+
+
+class BarberProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'first_name', 'last_name', 'email', 'phone_number']
+
+class BarberProfileImageForm(forms.ModelForm):
+    class Meta:
+        model = BarberProfile
+        fields = ['image', 'experience_years', 'bio']
