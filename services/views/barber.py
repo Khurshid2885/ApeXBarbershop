@@ -155,7 +155,7 @@ def barber_categories(request):
 @barber_required
 def barber_services(request, category_id):
     category = get_object_or_404(ServiceCategory, id=category_id)
-    services = Service.objects.filter(category=category)
+    services = Service.objects.filter(barber=request.user.user_barber, category=category)
     return render(request, "barber/services/services/services_list.html", {"services": services, "category": category})
 
 
@@ -165,7 +165,18 @@ def barber_service_view(request, service_id):
     return render(request, "barber/services/services/service-view.html", {"service": service})
 
 
-# Profile / Settings
+@barber_required
+def barber_service_delete(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    service.barber.remove(request.user.user_barber)
+    service.save()
+    return redirect("services:barber_services", category_id=service.category.id)
+
+
+# TODO .
+# TODO . Profile / Settings Management
+# TODO .
+
 @barber_required
 def barber_profile_view(request):
     return render(request, "barber/general/profile.html")

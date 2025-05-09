@@ -2,6 +2,7 @@ from decimal import Decimal, ROUND_HALF_UP
 
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.models import Group
+from django.db.models import Q
 from django.db.models.aggregates import Sum, Avg
 from django.shortcuts import redirect, render, get_object_or_404
 
@@ -52,7 +53,7 @@ def barber_edit(request, barber_id):
 
     form = BarberEditForm(instance=barber, user_instance=user)
     # Pre-Fill the selected services
-    form.fields['services'].initial = barber.services.all()
+    form.fields['services'].initial = barber.barber_services.all()
 
     if request.method == "POST":
         form = BarberEditForm(request.POST, request.FILES, instance=barber, user_instance=user)
@@ -185,7 +186,15 @@ def client_delete(request, client_id):
 
 @superadmin_required
 def manage_appointments(request):
-    appointments = Appointment.objects.all()
+    appointments = Appointment.objects.all().order_by('-date')
+
+    query = request.GET.get("q")
+    if query:
+        appointments = appointments.filter(Q(status=query) |
+                                           Q(client__first_name__icontains=query) | Q(
+            client__last_name__icontains=query)
+                                           | Q(barber__user__first_name__icontains=query) | Q(
+            barber__user__last_name__icontains=query))
     return render(request, "admin/appointments/manage-appointments.html", {"appointments": appointments})
 
 
@@ -229,13 +238,13 @@ def manage_category_overview(request, category_id):
     category = ServiceCategory.objects.get(id=category_id)
 
     # Total
-    total_services = category.services.count()
-    total_price = category.services.aggregate(Sum("price"))["price__sum"] or 0
-    total_duration = category.services.aggregate(Sum("duration"))["duration__sum"] or 0
+    total_services = category.category_services.count()
+    total_price = category.category_services.aggregate(Sum("price"))["price__sum"] or 0
+    total_duration = category.category_services.aggregate(Sum("duration"))["duration__sum"] or 0
 
     # Average
-    average_duration = category.services.aggregate(Avg("duration"))["duration__avg"] or 0
-    raw_avg = category.services.aggregate(price_avg=Avg("price"))["price_avg"] or 0.0
+    average_duration = category.category_services.aggregate(Avg("duration"))["duration__avg"] or 0
+    raw_avg = category.category_services.aggregate(price_avg=Avg("price"))["price_avg"] or 0.0
 
     # Average Price - Logic
     if raw_avg < 1000:

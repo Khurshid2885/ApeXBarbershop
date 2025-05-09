@@ -3,8 +3,10 @@ from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 
 from accounts.forms import LoginForm, RegisterForm
+from accounts.utils import is_not_authenticated
 
 
+@is_not_authenticated
 def register_view(request):
     form = RegisterForm()
 
@@ -24,7 +26,7 @@ def register_view(request):
 
     return render(request, "accounts/register.html", {"form": form})
 
-
+@is_not_authenticated
 def login_view(request):
     form = LoginForm()
 

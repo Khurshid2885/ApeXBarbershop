@@ -26,21 +26,35 @@
                     {% csrf_token %}
 
                     <!-- Client (Read-only) -->
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <label class="form-label small text-muted">Client</label>
                         <input type="text" class="form-control-plaintext"
                                value="{{ appointment.client.get_full_name }}" readonly>
                     </div>
 
+                    <!-- Service (Read-only) -->
+                    <div class="col-md-2">
+                        <label class="form-label small text-muted">Service</label>
+                        <input type="text" class="form-control-plaintext"
+                               value="{{ appointment.service.name }}" readonly>
+                    </div>
+
+                    <!-- Price (Read-only) -->
+                    <div class="col-md-2">
+                        <label class="form-label small text-muted">Price</label>
+                        <input type="text" class="form-control-plaintext"
+                               value="{{ appointment.service.price }} UZS" readonly>
+                    </div>
+
                     <!-- Date (Read-only) -->
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <label class="form-label small text-muted">Date</label>
                         <input type="text" class="form-control-plaintext"
                                value="{{ appointment.date }}" readonly>
                     </div>
 
                     <!-- Time (Read-only) -->
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <label class="form-label small text-muted">Time</label>
                         <input type="text" class="form-control-plaintext"
                                value="{{ appointment.time }}" readonly>
