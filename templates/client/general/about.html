@@ -1,0 +1,365 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}About Us - Premium Barbershop{% endblock %}
+
+{% block content %}
+    <!-- Hero Section with Background Image -->
+    <div class="about-hero position-relative d-flex align-items-center"
+         style="min-height: 60vh; background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('{% static 'images/about_bg.png' %}') no-repeat center center; background-size: cover;">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center text-white">
+                    <h1 class="display-3 fw-bold mb-3">{% trans 'Our Story' %}</h1>
+                    <p class="lead mb-0 mx-auto" style="max-width: 700px;">
+                        {% trans 'A tradition of excellence in mens grooming since 2005' %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Introduction -->
+    <div class="bg-white py-5">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="{% static 'images/barbershop-interior.png' %}" alt="Premium Barbershop Interior"
+                         class="img-fluid rounded-3 shadow-lg">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="display-6 fw-bold mb-4">{% trans 'Premium Barbershop Experience' %}</h2>
+                    <p class="mb-4">{% trans 'Founded in 2005, Premium Barbershop has built a reputation for excellence in mens grooming. What started as a small shop with two chairs has grown into a destination for those who appreciate quality haircuts and traditional barbering techniques combined with modern styles.' %}</p>
+                    <p>{% trans 'Our philosophy is simple: provide an exceptional grooming experience in a comfortable, welcoming environment. Every client who walks through our doors deserves our full attention and expertise.' %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Values Section -->
+    <div class="bg-light py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="display-6 fw-bold">{% trans 'Our Values' %}</h2>
+                <p class="text-muted">{% trans 'The principles that guide everything we do' %}</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Value 1 -->
+                <div class="col-md-4">
+                    <div class="text-center p-4 h-100 rounded-3 feature-card">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-star text-primary" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h4 class="mb-3">{% trans 'Excellence' %}</h4>
+                        <p class="text-muted">{% trans 'We strive for perfection in every cut, every trim, and every service we provide to our clients.' %}</p>
+                    </div>
+                </div>
+
+                <!-- Value 2 -->
+                <div class="col-md-4">
+                    <div class="text-center p-4 h-100 rounded-3 feature-card">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-people text-primary" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h4 class="mb-3">{% trans 'Community' %}</h4>
+                        <p class="text-muted">{% trans 'We believe in creating a welcoming space where everyone feels valued and respected.' %}</p>
+                    </div>
+                </div>
+
+                <!-- Value 3 -->
+                <div class="col-md-4">
+                    <div class="text-center p-4 h-100 rounded-3 feature-card">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-arrow-repeat text-primary" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h4 class="mb-3">{% trans 'Continuous Growth' %}</h4>
+                        <p class="text-muted">{% trans 'We constantly train and improve our skills to bring you the latest and best in mens grooming.' %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="bg-white py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="display-6 fw-bold">{% trans 'Meet Our Team' %}</h2>
+                <p class="text-muted mb-5">{% trans 'The skilled professionals behind our exceptional service' %}</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <!-- Team Member 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm h-100 text-center team-card">
+                        <div class="position-relative">
+                            <img src="{% static 'images/barber1.png' %}" class="card-img-top" alt="Barber"
+                                 style="height: 280px; object-fit: cover;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">{% trans 'Daniel Johnson' %}</h5>
+                            <p class="text-primary mb-3">{% trans 'Founder & Master Barber' %}</p>
+                            <p class="card-text small text-muted">{% trans 'With over 20 years of experience, Daniel brings exceptional skill and creativity to every haircut.' %}</p>
+                            <div class="social-icons mt-3">
+                                <a href="#" class="text-dark me-2"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="text-dark me-2"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="text-dark"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm h-100 text-center team-card">
+                        <div class="position-relative">
+                            <img src="{% static 'images/barber2.png' %}" class="card-img-top" alt="Barber"
+                                 style="height: 280px; object-fit: cover;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">{% trans 'Michael Torres' %}</h5>
+                            <p class="text-primary mb-3">{% trans 'Senior Barber' %}</p>
+                            <p class="card-text small text-muted">{% trans 'Specializing in classic cuts and hot towel shaves, Michael delivers precision with every service.' %}</p>
+                            <div class="social-icons mt-3">
+                                <a href="#" class="text-dark me-2"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="text-dark me-2"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="text-dark"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm h-100 text-center team-card">
+                        <div class="position-relative">
+                            <img src="{% static 'images/barber3.png' %}" class="card-img-top" alt="Barber"
+                                 style="height: 280px; object-fit: cover;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">{% trans 'James Wilson' %}</h5>
+                            <p class="text-primary mb-3">{% trans 'Style Specialist' %}</p>
+                            <p class="card-text small text-muted">{% trans 'With an eye for modern trends, James helps clients achieve their perfect contemporary look.' %}</p>
+                            <div class="social-icons mt-3">
+                                <a href="#" class="text-dark me-2"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="text-dark me-2"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="text-dark"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm h-100 text-center team-card">
+                        <div class="position-relative">
+                            <img src="{% static 'images/barber4.png' %}" class="card-img-top" alt="Barber"
+                                 style="height: 280px; object-fit: cover;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">{% trans 'Robert Chen' %}</h5>
+                            <p class="text-primary mb-3">{% trans 'Beard & Shave Expert' %}</p>
+                            <p class="card-text small text-muted">{% trans 'Roberts expertise in facial hair styling and traditional straight razor shaves is unmatched.' %}</p>
+                            <div class="social-icons mt-3">
+                                <a href="#" class="text-dark me-2"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="text-dark me-2"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="text-dark"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{% url 'services:barbers_list' %}" class="btn btn-outline-dark px-4 py-2">
+                    {% trans 'View All Barbers' %} <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Shop Section -->
+    <div class="py-5" style="background-color: #f8f8f8;">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <img src="{% static 'images/shop1.png' %}" alt="Barbershop Interior"
+                                 class="img-fluid rounded-3 shadow-sm mb-3"
+                                 style="height: 200px; object-fit: cover; width: 100%;">
+                            <img src="{% static 'images/shop2.png' %}" alt="Barbershop Tools"
+                                 class="img-fluid rounded-3 shadow-sm"
+                                 style="height: 150px; object-fit: cover; width: 100%;">
+                        </div>
+                        <div class="col-6">
+                            <img src="{% static 'images/shop3.png' %}" alt="Barbershop Atmosphere"
+                                 class="img-fluid rounded-3 shadow-sm"
+                                 style="height: 350px; object-fit: cover; width: 100%;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <h2 class="display-6 fw-bold mb-4">{% trans 'Our Facilities' %}</h2>
+                    <p class="mb-4">{% trans 'Our barbershop is designed to provide the perfect blend of classic barbershop tradition with modern comfort. From our premium barber chairs to our carefully selected grooming products, every detail has been chosen to enhance your experience.' %}</p>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-3"><i
+                                class="bi bi-check-circle-fill text-primary me-2"></i>{% trans 'Premium barber stations with ergonomic chairs' %}
+                        </li>
+                        <li class="mb-3"><i
+                                class="bi bi-check-circle-fill text-primary me-2"></i>{% trans 'Comfortable waiting area with refreshments' %}
+                        </li>
+                        <li class="mb-3"><i
+                                class="bi bi-check-circle-fill text-primary me-2"></i>{% trans 'High-quality grooming products for sale' %}
+                        </li>
+                        <li class="mb-3"><i
+                                class="bi bi-check-circle-fill text-primary me-2"></i>{% trans 'Complimentary beverages with every service' %}
+                        </li>
+                    </ul>
+                    <a href="{% url 'services:categories_list' %}" class="btn btn-primary px-4 py-2">
+                        {% trans 'Book Your Visit' %} <i class="bi bi-calendar-check ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="bg-white py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="display-6 fw-bold">{% trans 'Client Testimonials' %}</h2>
+                <p class="text-muted">{% trans 'What our clients say about their experience' %}</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Testimonial 1 -->
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 p-4 testimonial-card">
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p class="card-text mb-4">{% trans '"Ive been coming to Premium Barbershop for over 3 years now. The attention to detail and consistent quality is why I keep coming back. Best haircuts in town, hands down."' %}</p>
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px;">
+                                <img src="{% static 'images/client1.png' %}" alt="Client"
+                                     style="width: 50px; height: 50px; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">{% trans 'Thomas Rivera' %}</h6>
+                                <p class="text-muted small mb-0">{% trans 'Regular Client' %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 p-4 testimonial-card">
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p class="card-text mb-4">{% trans '"The hot towel shave here is an experience every man should try. Its relaxing, thorough, and leaves my skin feeling amazing. The barbers really know what theyre doing."' %}</p>
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px;">
+                                <img src="{% static 'images/client2.png' %}" alt="Client"
+                                     style="width: 50px; height: 50px; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">{% trans 'Alex Martin' %}</h6>
+                                <p class="text-muted small mb-0">{% trans 'Regular Client' %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 p-4 testimonial-card">
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p class="card-text mb-4">{% trans '"First time visiting and I am already booking my next appointment. The staff was friendly, the atmosphere was welcoming, and my haircut is exactly what I wanted."' %}</p>
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px;">
+                                <img src="{% static 'images/client3.png' %}" alt="Client"
+                                     style="width: 50px; height: 50px; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">{% trans 'David Kim' %}</h6>
+                                <p class="text-muted small mb-0">{% trans 'New Client' %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="bg-dark text-white py-5">
+        <div class="container py-4 text-center">
+            <h2 class="display-6 fw-bold mb-4">{% trans 'Have Questions?' %}</h2>
+            <p class="lead mb-4">{% trans 'Get in touch with us for inquiries about services, special requests, or career opportunities.' %}</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{% url 'services:contact_us' %}" class="btn btn-primary btn-lg px-4">
+                    {% trans 'Contact Us' %} <i class="bi bi-envelope ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0);
+        }
+
+        .team-card {
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icons a {
+            transition: all 0.3s ease;
+        }
+
+        {#.social-icons a:hover {#}
+        {#    color: var(--bs-primary) !important;#}
+        {
+        #}#}
+    </style>
+{% endblock %}

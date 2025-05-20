@@ -122,7 +122,7 @@ class BarberEditForm(forms.ModelForm):
 
         services = self.cleaned_data.get("services")
         if services:
-            barber.services.set(services)
+            barber.barber_services.set(services)
 
         if commit:
             barber.save()

@@ -1,0 +1,488 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Contact Us - Premium Barbershop{% endblock %}
+
+{% block content %}
+    <!-- Contact Hero Section -->
+    <div class="contact-hero position-relative d-flex align-items-center"
+         style="min-height: 40vh; background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.6)), url('{% static 'images/contact_bg.png' %}') no-repeat center center; background-size: cover;">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center text-white">
+                    <h1 class="display-3 fw-bold mb-3">{% trans 'Get In Touch' %}</h1>
+                    <p class="lead mb-0 mx-auto" style="max-width: 700px;">
+                        {% trans "We'd love to hear from you. Reach out to our team for appointments, information, or feedback." %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Information and Form Section -->
+    <div class="bg-white py-5 position-relative">
+        <!-- Decorative element -->
+        <div class="position-absolute top-0 start-0 w-100 overflow-hidden"
+             style="height: 70px; transform: translateY(-100%);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 70" preserveAspectRatio="none"
+                 style="width: 100%; height: 100%;">
+                <path fill="#ffffff" fill-opacity="1" d="M0,64L1440,32L1440,320L0,320Z"></path>
+            </svg>
+        </div>
+
+        <div class="container py-4">
+            <div class="row g-5">
+                <!-- Contact Information Column -->
+                <div class="col-lg-5">
+                    <div class="mb-5">
+                        <h2 class="fw-bold mb-4">{% trans 'Contact Information' %}</h2>
+                        <p class="text-muted mb-5">{% trans 'Ready to book your appointment or have questions? Reach out through any of these channels or visit us in person.' %}</p>
+                    </div>
+
+                    <!-- Contact Cards -->
+                    <div class="contact-card mb-4 p-4 rounded-3 shadow-sm">
+                        <div class="d-flex align-items-center">
+                            <div class="contact-icon me-4 d-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10">
+                                <i class="bi bi-geo-alt text-primary" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">{% trans 'Our Location' %}</h5>
+                                <p class="mb-0 text-muted">Shota Rustavelli 56A<br>Tashkent, UZ 100000</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card mb-4 p-4 rounded-3 shadow-sm">
+                        <div class="d-flex align-items-center">
+                            <div class="contact-icon me-4 d-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10">
+                                <i class="bi bi-telephone text-primary" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">{% trans 'Call Us' %}</h5>
+                                <p class="mb-0 text-muted">+998 (97) 704-86-30<br>+998 (97) 704-86-30</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card mb-4 p-4 rounded-3 shadow-sm">
+                        <div class="d-flex align-items-center">
+                            <div class="contact-icon me-4 d-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10">
+                                <i class="bi bi-envelope text-primary" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">{% trans 'Email Us' %}</h5>
+                                <p class="mb-0 text-muted">info@apexbarbershop.com<br>bookings@apexbarbershop.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card mb-4 p-4 rounded-3 shadow-sm">
+                        <div class="d-flex align-items-center">
+                            <div class="contact-icon me-4 d-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10">
+                                <i class="bi bi-clock text-primary" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">{% trans 'Business Hours' %}</h5>
+                                <p class="mb-0 text-muted">
+                                    Monday - Friday: 9:00 AM - 8:00 PM<br>
+                                    Saturday: 9:00 AM - 6:00 PM<br>
+                                    Sunday: 10:00 AM - 4:00 PM
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="mt-5">
+                        <h5 class="mb-3">{% trans 'Follow Us' %}</h5>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="social-link d-flex align-items-center justify-content-center">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link d-flex align-items-center justify-content-center">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="#" class="social-link d-flex align-items-center justify-content-center">
+                                <i class="bi bi-twitter-x"></i>
+                            </a>
+                            <a href="#" class="social-link d-flex align-items-center justify-content-center">
+                                <i class="bi bi-yelp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Column -->
+                <div class="col-lg-7">
+                    <div class="contact-form-container p-4 p-lg-5 rounded-4 shadow">
+                        <h2 class="fw-bold mb-4 text-center">{% trans 'Send Us a Message' %}</h2>
+                        <p class="text-muted text-center mb-4">
+                            {% trans "Fill out the form below and we'll get back to you as soon as possible." %}
+                        </p>
+                        <form action="" method="post" class="needs-validation" novalidate>
+                            {% csrf_token %}
+
+                            <div class="row g-3">
+                                <!-- Name Fields -->
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="firstName" name="first_name"
+                                               placeholder="John" required>
+                                        <label for="firstName">{% trans 'First Name' %}</label>
+                                        <div class="invalid-feedback">
+                                            {% trans 'Please enter your first name.' %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="lastName" name="last_name"
+                                               placeholder="Doe" required>
+                                        <label for="lastName">{% trans 'Last Name' %}</label>
+                                        <div class="invalid-feedback">
+                                            {% trans 'Please enter your last name.' %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Fields -->
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="email" name="email"
+                                               placeholder="name@example.com" required>
+                                        <label for="email">{% trans 'Email Address' %}</label>
+                                        <div class="invalid-feedback">
+                                            {% trans 'Please enter a valid email address.' %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="tel" class="form-control" id="phone" name="phone"
+                                               placeholder="+998 (97) 704-86-30">
+                                        <label for="phone">{% trans 'Phone Number' %} ({% trans 'Optional' %})</label>
+                                    </div>
+                                </div>
+
+                                <!-- Subject -->
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="subject" name="subject" required>
+                                            <option value="" selected disabled>{% trans 'Choose...' %}</option>
+                                            <option value="appointment">{% trans 'Appointment Inquiry' %}</option>
+                                            <option value="services">{% trans 'Services Information' %}</option>
+                                            <option value="feedback">{% trans 'Feedback' %}</option>
+                                            <option value="careers">{% trans 'Career Opportunities' %}</option>
+                                            <option value="other">{% trans 'Other' %}</option>
+                                        </select>
+                                        <label for="subject">{% trans 'Subject' %}</label>
+                                        <div class="invalid-feedback">
+                                            {% trans 'Please select a subject.' %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Message -->
+                                <div class="col-12">
+                                    <div class="form-floating mb-4">
+                                        <textarea class="form-control" id="message" name="message" style="height: 150px"
+                                                  required placeholder="Your message"></textarea>
+                                        <label for="message">{% trans 'Your Message' %}</label>
+                                        <div class="invalid-feedback">
+                                            {% trans 'Please enter your message.' %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Newsletter Opt-in -->
+                                <div class="col-12 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="yes" id="newsletter"
+                                               name="newsletter">
+                                        <label class="form-check-label text-muted" for="newsletter">
+                                            {% trans 'Subscribe to our newsletter for special offers and updates' %}
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="col-12 mt-2">
+                                    <button class="btn btn-primary btn-lg w-100 submit-btn" type="submit">
+                                        <span class="btn-text">{% trans 'Send Message' %}</span>
+                                        <span class="spinner-border spinner-border-sm d-none" role="status"
+                                              aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section position-relative">
+        <div class="ratio ratio-21x9" style="height: 450px;">
+            <!-- Replace with your actual Google Maps embed code -->
+            <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2990.123456789012!2d69.241234567890!3d41.311111111111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b77e7e0a0a3%3A0xabcdef1234567890!2sAmir%20Temur%20shoh%20ko‘chasi%2C%2043%2C%20Tashkent!5e0!3m2!1sen!2suz!4v1716243294488!5m2!1sen!2suz"
+                    style="border:0; width:100%; height:400px;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <!-- Map Overlay Card -->
+        <div class="position-absolute top-50 start-0 translate-middle-y d-none d-lg-block" style="margin-left: 5%;">
+            <div class="card border-0 shadow-lg map-card p-4">
+                <div class="card-body">
+                    <h4 class="fw-bold mb-3">{% trans 'Visit ApeX Barbershop' %}</h4>
+                    <p class="mb-3">{% trans "We're conveniently located just a short walk from Amir Temur Square. Come in for a consultation or your next premium cut." %}</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+                        <span>Amir Temur shoh koʻchasi, 43, Tashkent</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-train-front-fill text-primary me-2"></i>
+                        <span>{% trans 'Nearest metro station: Abdulla Qodiriy Metro Station (Line Circle)' %}</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-bus-front-fill text-primary me-2"></i>
+                        <span>{% trans 'Multiple bus stops nearby on Amir Temur Street' %}</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-p-square-fill text-primary me-2"></i>
+                        <span>{% trans 'Public parking available at Amir Temur Street Parking Garage, 2-minute walk' %}</span>
+                    </div>
+                    <a href="https://maps.google.com/?q=Amir+Temur+shoh+ko‘chasi,+43,+Tashkent"
+                       target="_blank" class="btn btn-primary mt-3 w-100">
+                        <i class="bi bi-map me-2"></i>{% trans 'Get Directions' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="bg-light py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="display-6 fw-bold">{% trans 'Frequently Asked Questions' %}</h2>
+                <p class="text-muted">{% trans 'Quick answers to common questions' %}</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion" id="faqAccordion">
+                        <!-- FAQ Item 1 -->
+                        <div class="accordion-item mb-3 border-0 shadow-sm rounded-3 overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                                    {% trans 'Do I need to book an appointment?' %}
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    {% trans 'While we welcome walk-ins when possible, we strongly recommend booking an appointment to ensure you get your preferred barber and time slot. You can book online through our website, by phone, or using our mobile app.' %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 2 -->
+                        <div class="accordion-item mb-3 border-0 shadow-sm rounded-3 overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                    {% trans 'What payment methods do you accept?' %}
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    {% trans 'We accept all major credit cards, debit cards, mobile payments (Apple Pay, Google Pay), and cash. We also offer gift cards that can be purchased in-store or online.' %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 3 -->
+                        <div class="accordion-item mb-3 border-0 shadow-sm rounded-3 overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                    {% trans 'How early should I arrive for my appointment?' %}
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    {% trans 'We recommend arriving 5-10 minutes before your scheduled appointment time. This allows you to check in, enjoy a complimentary beverage, and relax before your service begins.' %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 4 -->
+                        <div class="accordion-item mb-3 border-0 shadow-sm rounded-3 overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                    {% trans 'What if I need to cancel or reschedule?' %}
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    {% trans "We understand that plans change. We kindly ask for at least 24 hours' notice for cancellations or rescheduling. You can make these changes through our online booking system, mobile app, or by calling us directly." %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <p class="mb-3">{% trans 'Still have questions?' %}</p>
+                        <a href="tel:+977048630" class="btn btn-outline-dark">
+                            <i class="bi bi-telephone me-2"></i>{% trans 'Call Us' %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="py-5 bg-dark text-white">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">{% trans 'Join Our Community' %}</h2>
+                    <p class="mb-4">{% trans 'Subscribe to our newsletter for style tips, special offers, and updates.' %}</p>
+
+                    <form action="" method="post" class="row g-2 justify-content-center">
+                        {% csrf_token %}
+                        <div class="col-md-8">
+                            <div class="input-group input-group-lg">
+                                <input type="email" class="form-control" placeholder="{% trans 'Your email address' %}"
+                                       required>
+                                <button class="btn btn-primary" type="submit">{% trans 'Subscribe' %}</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <p class="small mt-3 text-white-50">{% trans 'By subscribing, you agree to receive marketing emails from us. You can unsubscribe anytime.' %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Contact Card Styling */
+        .contact-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Form Styling */
+        .form-control:focus, .form-select:focus {
+            border-color: var(--bs-primary);
+            box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+        }
+
+        .contact-form-container {
+            transition: all 0.3s ease;
+            background-color: #ffffff;
+        }
+
+        /* Social Links */
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+            color: #212529;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background-color: var(--bs-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Map Card */
+        .map-card {
+            max-width: 350px;
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Submit Button Animation */
+        .submit-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(var(--bs-primary-rgb), 0.3);
+        }
+
+        /* Accordion Styling */
+        .accordion-button:not(.collapsed) {
+            background-color: var(--bs-dark);
+            color: white;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0, 0, 0, 0.125);
+        }
+
+        @media (max-width: 767.98px) {
+            .contact-hero {
+                min-height: 30vh;
+            }
+        }
+    </style>
+
+    <script>
+        // Form validation
+        (() => {
+            'use strict'
+
+            // Fetch all forms we want to apply validation to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    } else {
+                        // Show loading spinner
+                        const submitBtn = form.querySelector('.submit-btn')
+                        const btnText = submitBtn.querySelector('.btn-text')
+                        const spinner = submitBtn.querySelector('.spinner-border')
+
+                        btnText.classList.add('d-none')
+                        spinner.classList.remove('d-none')
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+{% endblock %}

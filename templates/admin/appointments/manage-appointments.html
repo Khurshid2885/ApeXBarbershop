@@ -18,8 +18,20 @@
 
         <!-- Search Bar -->
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search appointments..." aria-label="Search">
-            <button class="btn btn-outline-secondary" type="button">Search</button>
+            <form method="get" class="d-flex w-10">
+                <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search appointments..."
+                        aria-label="Search"
+                        name="q"
+                        value="{{ request.GET.q }}"
+                >
+                <button class="btn btn-outline-secondary me-1" type="submit">Search</button>
+                {% if request.GET.q %}
+                    <a href="?" class="btn btn-outline-danger">Clear</a>
+                {% endif %}
+            </form>
         </div>
 
         <!-- Appointments Table -->
@@ -43,8 +55,8 @@
                         {% for appointment in appointments %}
                             <tr>
                                 <td>{{ appointment.id }}</td>
-                                <td>{{ appointment.customer.name }}</td>
-                                <td>{{ appointment.barber.name }}</td>
+                                <td>{{ appointment.client.get_full_name }}</td>
+                                <td>{{ appointment.barber.user.get_full_name }}</td>
                                 <td>{{ appointment.service.name }}</td>
                                 <td>{{ appointment.date }}</td>
                                 <td>{{ appointment.time }}</td>
