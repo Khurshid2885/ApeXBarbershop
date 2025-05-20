@@ -1,43 +1,125 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Categories{% endblock %}
+{% block title %}Service Categories{% endblock %}
 
 {% block content %}
     <div class="container py-5">
-        <div class="mb-4 text-center">
-            <h1 class="display-5">Our Categories</h1>
-            <p class="text-muted">Browse through all the services we offer</p>
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold mb-3">Our Services</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 600px;">Discover our premium grooming services tailored
+                to meet your unique style and preferences</p>
         </div>
 
-        <div class="row g-4">
+        <!-- Search Bar (Optional) -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search services..." id="categorySearch">
+                    <button class="btn btn-dark" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Grid -->
+        <div class="row g-4" id="categoriesGrid">
             {% for category in categories %}
-                <div class="col-6 col-md-4 col-lg-3">
-                    <a href="{{ category.get_absolute_url }}" class="text-decoration-none text-dark">
-                        <div class="card h-100 shadow-sm border-0 hover-shadow">
-                            {% comment %} Replace with real images or icons per category {% endcomment %}
-                            <img src="{{ category.main_image.url }}"
-                                 class="card-img-top" alt="{{ category.name }}"
-                                 onerror="this.onerror=null;this.src='{% static 'images/categories/default.jpg' %}';">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{ category.name }}</h5>
+                <div class="col-6 col-md-4 col-lg-3 category-item">
+                    <a href="{% url 'services:category_view' category.id %}" class="text-decoration-none">
+                        <div class="card h-100 border-0 rounded-3 category-card">
+                            <div class="card-img-container position-relative overflow-hidden" style="height: 180px;">
+                                <img src="{{ category.main_image.url }}"
+                                     class="w-100 h-100 object-cover"
+                                     alt="{{ category.name }}"
+                                     onerror="this.onerror=null;this.src='{% static 'images/categories/default.jpg' %}';">
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="card-body text-center py-3">
+                                <h5 class="card-title mb-0 fw-bold">{{ category.name }}</h5>
+                                {% if category.service_count %}
+                                    <p class="text-muted small mb-0 mt-1">{{ category.service_count }} services</p>
+                                {% endif %}
                             </div>
                         </div>
                     </a>
                 </div>
             {% empty %}
-                <div class="col-12">
-                    <p class="text-center text-muted">No categories available at the moment.</p>
+                <div class="col-12 text-center py-5">
+                    <div class="empty-state">
+                        <i class="bi bi-grid-3x3-gap display-1 text-muted mb-3"></i>
+                        <h4>No Categories Available</h4>
+                        <p class="text-muted">We're currently updating our services. Please check back soon.</p>
+                    </div>
                 </div>
             {% endfor %}
         </div>
     </div>
 
     <style>
-        .hover-shadow:hover {
-            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
-            transform: translateY(-2px);
-            transition: all .2s ease-in-out;
+        .object-cover {
+            object-fit: cover;
+        }
+
+        .category-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .overlay {
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
+        }
+
+        /* Simple animation for empty state */
+        .empty-state i {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.6;
+            }
         }
     </style>
+
+    <script>
+        // Simple search functionality
+        document.getElementById('categorySearch').addEventListener('keyup', function () {
+            const searchTerm = this.value.toLowerCase();
+            const items = document.querySelectorAll('.category-item');
+
+            items.forEach(item => {
+                const categoryName = item.querySelector('.card-title').textContent.toLowerCase();
+                if (categoryName.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
 {% endblock %}

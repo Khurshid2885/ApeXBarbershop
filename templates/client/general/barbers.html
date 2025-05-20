@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ barber.name }} Barbers{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <!-- Page Header with Breadcrumb Navigation -->
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4">
+            <div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'services:home' %}" class="text-decoration-none">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Barbers</li>
+                    </ol>
+                </nav>
+                <h1 class="display-6 mt-2 mb-0">Our Professional Barbers</h1>
+                <p class="text-muted mt-2">Choose a skilled barber for your next appointment</p>
+            </div>
+            <a href="{% url 'services:home' %}" class="btn btn-outline-dark mt-3 mt-md-0">
+                <i class="bi bi-arrow-left me-2"></i>Back to Home
+            </a>
+        </div>
+
+        <!-- Filter Options (Optional) -->
+        {% if barbers %}
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-light rounded-3">
+                <div class="d-flex align-items-center mb-2 mb-md-0">
+                    <span class="text-muted me-2">{{ barbers|length }} barber{% if barbers|length != 1 %}s{% endif %}
+                        available</span>
+                </div>
+                <div class="d-flex gap-2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-white">Filter by</span>
+                        <select class="form-select form-select-sm" id="filterBarbers">
+                            <option value="all">All Barbers</option>
+                            <option value="top_rated">Top Rated</option>
+                            <option value="most_experienced">Most Experienced</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if barbers %}
+            <div class="row g-4" id="barbersGrid">
+                {% for barber in barbers %}
+                    <div class="col-6 col-md-4 col-lg-3 barber-item"
+                         data-rating="{{ barber.rating|default:'0' }}"
+                         data-experience="{{ barber.experience_years|default:'0' }}">
+                        <div class="card h-100 border-0 rounded-3 shadow-sm barber-card">
+                            <div class="position-relative">
+                                <img src="{{ barber.image.url }}"
+                                     class="card-img-top"
+                                     alt="{{ barber.name }}"
+                                     style="height: 190px; object-fit: cover;">
+
+                                {% if barber.rating %}
+                                    <div class="position-absolute bottom-0 end-0 bg-dark bg-opacity-75 text-white px-2 py-1 rounded-start m-2">
+                                        <i class="bi bi-star-fill text-warning me-1"></i>
+                                        <span>{{ barber.rating }}</span>
+                                    </div>
+                                {% endif %}
+
+                                {% if barber.is_available %}
+                                    <div class="position-absolute top-0 start-0 m-2">
+                                        <span class="badge bg-success">Available Today</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="card-body p-3">
+                                <h5 class="card-title fw-bold mb-1">{{ barber.user.first_name }}</h5>
+
+                                {% if barber.specialization %}
+                                    <p class="text-muted small mb-2">{{ barber.specialization }}</p>
+                                {% endif %}
+
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    {% if barber.experience_years %}
+                                        <span class="badge bg-light text-dark">
+                                        <i class="bi bi-briefcase me-1"></i>{{ barber.experience_years }} years
+                                    </span>
+                                    {% endif %}
+
+                                    {% if barber.specialty %}
+                                        <span class="badge bg-light text-dark">
+                                        <i class="bi bi-award me-1"></i>{{ barber.specialty }}
+                                    </span>
+                                    {% endif %}
+                                </div>
+
+                                {% if barber.short_bio %}
+                                    <p class="card-text small text-muted mb-3">{{ barber.short_bio|truncatechars:80 }}</p>
+                                {% endif %}
+
+                                <a href="#"
+                                   class="btn btn-primary w-100 d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-calendar-check me-2"></i>Book Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-5 my-4">
+                <div class="empty-state">
+                    <i class="bi bi-person-x display-1 text-muted mb-3"></i>
+                    <h4>No Barbers Available</h4>
+                    <p class="text-muted">Our barbers are currently fully booked or unavailable.</p>
+                    <a href="{% url 'services:home' %}" class="btn btn-outline-primary mt-3">
+                        Return to Home
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <style>
+        .barber-card {
+            transition: all 0.3s ease;
+        }
+
+        .barber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .empty-state i {
+            opacity: 0.7;
+        }
+    </style>
+
+    <script>
+        // Filter functionality
+        document.getElementById('filterBarbers')?.addEventListener('change', function () {
+            const filterBy = this.value;
+            const items = Array.from(document.querySelectorAll('.barber-item'));
+
+            items.forEach(item => {
+                item.style.display = 'block'; // Reset display
+
+                if (filterBy === 'top_rated') {
+                    const rating = parseFloat(item.dataset.rating);
+                    if (rating < 4.0) { // Hide barbers with rating less than 4.0
+                        item.style.display = 'none';
+                    }
+                } else if (filterBy === 'most_experienced') {
+                    const experience = parseInt(item.dataset.experience);
+                    if (experience < 5) { // Hide barbers with less than 5 years experience
+                        item.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
