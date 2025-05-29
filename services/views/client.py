@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.utils.translation import get_language
 
 from accounts.models import BarberProfile
 from services.models.service import ServiceCategory
@@ -40,8 +41,12 @@ def barber_view(request, barber_id):
 @superadmin_blocked
 @barber_blocked
 def categories_list(request):
-    categories = ServiceCategory.objects.all()
-    return render(request, "client/category/categories.html", {"categories": categories})
+    categories = ServiceCategory.objects.all().order_by("id")
+    current_language = get_language()
+    return render(request, "client/category/categories.html", {
+        "categories": categories,
+        "LANGUAGE_CODE": current_language,
+    })
 
 
 @superadmin_blocked
@@ -49,7 +54,6 @@ def categories_list(request):
 def category_view(request, category_id):
     category = get_object_or_404(ServiceCategory, id=category_id)
     services = category.category_services.all()
-    print(services)
 
     context = {
         "category": category,

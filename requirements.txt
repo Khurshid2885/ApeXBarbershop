@@ -5,3 +5,4 @@ psycopg2-binary==2.9.10
 sqlparse==0.5.3
 django-widget-tweaks==1.5.0
 django-rosetta==0.10.1
+django-modeltranslation==0.19.14
