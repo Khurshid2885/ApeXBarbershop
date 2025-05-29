@@ -1,22 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Service Categories{% endblock %}
+{% block title %}{% trans "Service Categories" %}{% endblock %}
 
 {% block content %}
     <div class="container py-5">
         <!-- Hero Section -->
         <div class="text-center mb-5">
-            <h1 class="display-5 fw-bold mb-3">Our Services</h1>
-            <p class="lead text-muted mx-auto" style="max-width: 600px;">Discover our premium grooming services tailored
-                to meet your unique style and preferences</p>
+            <h1 class="display-5 fw-bold mb-3">{% trans "Our Services" %}</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 600px;">
+                {% trans "Discover our premium grooming services tailored to meet your unique style and preferences" %}
+            </p>
         </div>
 
-        <!-- Search Bar (Optional) -->
+        <!-- Search Bar -->
         <div class="row justify-content-center mb-5">
             <div class="col-md-6">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search services..." id="categorySearch">
+                    <input type="text" class="form-control" placeholder="{% trans 'Search services...' %}"
+                           id="categorySearch">
                     <button class="btn btn-dark" type="button">
                         <i class="bi bi-search"></i>
                     </button>
@@ -27,20 +30,35 @@
         <!-- Categories Grid -->
         <div class="row g-4" id="categoriesGrid">
             {% for category in categories %}
-                <div class="col-6 col-md-4 col-lg-3 category-item">
+                <div class="col-6 col-md-4 col-lg-3 category-item"
+                     data-name-en="{{ category.name_en|default:category.name }}"
+                     data-name-ru="{{ category.name_ru|default:category.name }}"
+                     data-name-uz="{{ category.name_uz|default:category.name }}">
                     <a href="{% url 'services:category_view' category.id %}" class="text-decoration-none">
                         <div class="card h-100 border-0 rounded-3 category-card">
                             <div class="card-img-container position-relative overflow-hidden" style="height: 180px;">
                                 <img src="{{ category.main_image.url }}"
                                      class="w-100 h-100 object-cover"
-                                     alt="{{ category.name }}"
+                                     alt="{% if LANGUAGE_CODE == 'ru' %}{{ category.name_ru|default:category.name }}
+                                      {% elif LANGUAGE_CODE == 'uz' %}{{ category.name_uz|default:category.name }}
+                                      {% else %}{{ category.name_en|default:category.name }}{% endif %}"
                                      onerror="this.onerror=null;this.src='{% static 'images/categories/default.jpg' %}';">
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text-center py-3">
-                                <h5 class="card-title mb-0 fw-bold">{{ category.name }}</h5>
+                                <h5 class="card-title mb-0 fw-bold">
+                                    {% if LANGUAGE_CODE == 'ru' %}
+                                        {{ category.name_ru|default:category.name }}
+                                    {% elif LANGUAGE_CODE == 'uz' %}
+                                        {{ category.name_uz|default:category.name }}
+                                    {% else %}
+                                        {{ category.name_en|default:category.name }}
+                                    {% endif %}
+                                </h5>
                                 {% if category.service_count %}
-                                    <p class="text-muted small mb-0 mt-1">{{ category.service_count }} services</p>
+                                    <p class="text-muted small mb-0 mt-1">
+                                        {{ category.service_count }} {% trans "services" %}
+                                    </p>
                                 {% endif %}
                             </div>
                         </div>
@@ -50,8 +68,8 @@
                 <div class="col-12 text-center py-5">
                     <div class="empty-state">
                         <i class="bi bi-grid-3x3-gap display-1 text-muted mb-3"></i>
-                        <h4>No Categories Available</h4>
-                        <p class="text-muted">We're currently updating our services. Please check back soon.</p>
+                        <h4>{% trans "No Categories Available" %}</h4>
+                        <p class="text-muted">{% trans "We're currently updating our services. Please check back soon." %}</p>
                     </div>
                 </div>
             {% endfor %}
@@ -88,7 +106,6 @@
             background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
         }
 
-        /* Simple animation for empty state */
         .empty-state i {
             animation: pulse 2s infinite;
         }
@@ -107,13 +124,21 @@
     </style>
 
     <script>
-        // Simple search functionality
+        const currentLang = "{{ LANGUAGE_CODE }}";
         document.getElementById('categorySearch').addEventListener('keyup', function () {
             const searchTerm = this.value.toLowerCase();
             const items = document.querySelectorAll('.category-item');
 
             items.forEach(item => {
-                const categoryName = item.querySelector('.card-title').textContent.toLowerCase();
+                let categoryName;
+                if (currentLang === 'ru') {
+                    categoryName = item.getAttribute('data-name-ru').toLowerCase();
+                } else if (currentLang === 'uz') {
+                    categoryName = item.getAttribute('data-name-uz').toLowerCase();
+                } else {
+                    categoryName = item.getAttribute('data-name-en').toLowerCase();
+                }
+
                 if (categoryName.includes(searchTerm)) {
                     item.style.display = 'block';
                 } else {

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'services',
     'common',
     'widget_tweaks',
+    'modeltranslation',
 
     # Rosetta - Internationalization
     'rosetta',

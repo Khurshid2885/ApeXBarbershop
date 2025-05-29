@@ -20,7 +20,7 @@ class ServiceCategory(models.Model):
 class Service(BaseModel):
     category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE, related_name="category_services", null=True,
                                  blank=True)
-    barber = models.ManyToManyField(BarberProfile, related_name="barber_services")
+    barber = models.ManyToManyField(BarberProfile, related_name="barber_services", null=True, blank=True)
     name = models.CharField(max_length=50)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=3, validators=[
