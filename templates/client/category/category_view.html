@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}{{ context.category.name }} Services{% endblock %}
 
@@ -9,20 +10,21 @@
             <div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{% url 'services:home' %}" class="text-decoration-none">Home</a>
+                        <li class="breadcrumb-item"><a href="{% url 'services:home' %}"
+                                                       class="text-decoration-none">{% trans 'Home' %}</a>
                         </li>
                         <li class="breadcrumb-item"><a href="{% url 'services:categories_list' %}"
-                                                       class="text-decoration-none">Categories</a></li>
+                                                       class="text-decoration-none">{% trans 'Categories' %}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ context.category.name }}</li>
                     </ol>
                 </nav>
-                <h1 class="display-6 mt-2 mb-0">{{ context.category.name }} Services</h1>
+                <h1 class="display-6 mt-2 mb-0">{{ context.category.name }} </h1>
                 {% if context.category.description %}
                     <p class="text-muted mt-2">{{ context.category.description }}</p>
                 {% endif %}
             </div>
             <a href="{% url 'services:categories_list' %}" class="btn btn-outline-dark mt-3 mt-md-0">
-                <i class="bi bi-arrow-left me-2"></i>Back to Categories
+                <i class="bi bi-arrow-left me-2"></i>{% trans 'Back to Categories' %}
             </a>
         </div>
 
@@ -30,17 +32,16 @@
         {% if context.services %}
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-light rounded-3">
                 <div class="d-flex align-items-center mb-2 mb-md-0">
-                    <span class="text-muted me-2">{{ context.services|length }} service
-                        {% if context.services|length != 1 %}s{% endif %}</span>
+                    <span class="text-muted me-2">{{ context.services|length }} {% trans 'services' %}</span>
                 </div>
                 <div class="d-flex gap-2">
                     <div class="input-group input-group-sm">
-                        <span class="input-group-text bg-white">Sort by</span>
+                        <span class="input-group-text bg-white">{% trans 'Sort By' %}</span>
                         <select class="form-select form-select-sm" id="sortServices">
-                            <option value="name">Name</option>
-                            <option value="price_low">Price: Low to High</option>
-                            <option value="price_high">Price: High to Low</option>
-                            <option value="duration">Duration</option>
+                            <option value="name">{% trans 'Name' %}</option>
+                            <option value="price_low">{% trans 'Price: Low to High' %}</option>
+                            <option value="price_high">{% trans 'Price: High to Low' %}</option>
+                            <option value="duration">{% trans 'Duration' %}</option>
                         </select>
                     </div>
                 </div>
@@ -100,7 +101,7 @@
 
                                 <a href="#"
                                    class="btn btn-primary w-100 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-calendar-plus me-2"></i>Book Now
+                                    <i class="bi bi-calendar-plus me-2"></i>{% trans 'Book Now' %}
                                 </a>
                             </div>
                         </div>

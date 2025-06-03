@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-29 16:23+0500\n"
+"POT-Creation-Date: 2025-06-03 14:00+0500\n"
 "PO-Revision-Date: 2025-03-28 11:04+0000\n"
 "Last-Translator: Xurshid Xolmirzayev <01hurshid@inbox.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,19 +21,21 @@ msgstr ""
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.10.1\n"
 
-#: .\config\settings.py:134
+#: .\config\settings.py:135
 msgid "English"
 msgstr "Английский"
 
-#: .\config\settings.py:135
+#: .\config\settings.py:136
 msgid "Uzbek"
 msgstr "Узбекский"
 
-#: .\config\settings.py:136
+#: .\config\settings.py:137
 msgid "Russian"
 msgstr "Русский"
 
 #: .\templates\base.html:27 .\templates\base.html:102
+#: .\templates\client\category\category_view.html:14
+#: .\templates\client\general\barbers.html:14
 msgid "Home"
 msgstr "Главная"
 
@@ -42,6 +44,7 @@ msgid "Services"
 msgstr "Сервисы"
 
 #: .\templates\base.html:32 .\templates\base.html:106
+#: .\templates\client\general\barbers.html:16
 msgid "Barbers"
 msgstr "Парихмахеры"
 
@@ -88,7 +91,7 @@ msgstr "Все права защищены."
 
 #: .\templates\client\category\categories.html:5
 msgid "Service Categories"
-msgstr "Сервисы"
+msgstr "Сервисные Категории"
 
 #: .\templates\client\category\categories.html:11
 msgid "Our Services"
@@ -99,23 +102,60 @@ msgid ""
 "Discover our premium grooming services tailored to meet your unique style "
 "and preferences"
 msgstr ""
-"Откройте для себя наши премиальные услуги по уходу, которые подойдут вашему уникальному стилю и предпочтениям"
+"Откройте для себя наши премиальные услуги по уходу, которые подойдут вашему "
+"уникальному стилю и предпочтениям"
 
 #: .\templates\client\category\categories.html:21
 msgid "Search services..."
 msgstr "Поиск услуг..."
 
-#: .\templates\client\category\categories.html:47
+#: .\templates\client\category\categories.html:60
+#: .\templates\client\category\category_view.html:35
 msgid "services"
 msgstr "услуг"
 
-#: .\templates\client\category\categories.html:58
+#: .\templates\client\category\categories.html:71
 msgid "No Categories Available"
 msgstr "Нет доступных категорий"
 
-#: .\templates\client\category\categories.html:59
+#: .\templates\client\category\categories.html:72
 msgid "We're currently updating our services. Please check back soon."
 msgstr "В настоящее время мы обновляем наши услуги. Пожалуйста, зайдите позже."
+
+#: .\templates\client\category\category_view.html:17
+msgid "Categories"
+msgstr "Категории"
+
+#: .\templates\client\category\category_view.html:27
+msgid "Back to Categories"
+msgstr "Назад к категориям"
+
+#: .\templates\client\category\category_view.html:39
+msgid "Sort By"
+msgstr "Сортировать по"
+
+#: .\templates\client\category\category_view.html:41
+msgid "Name"
+msgstr "Название"
+
+#: .\templates\client\category\category_view.html:42
+msgid "Price: Low to High"
+msgstr "Цена: от низкой к высокой"
+
+#: .\templates\client\category\category_view.html:43
+msgid "Price: High to Low"
+msgstr "Цена: от высокой к низкой"
+
+#: .\templates\client\category\category_view.html:44
+#, fuzzy
+#| msgid "Our Location"
+msgid "Duration"
+msgstr "Наше местоположение"
+
+#: .\templates\client\category\category_view.html:104
+#: .\templates\client\general\home.html:145
+msgid "Book Now"
+msgstr "Записаться сейчас"
 
 #: .\templates\client\general\about.html:14
 msgid "Our Story"
@@ -380,6 +420,62 @@ msgid ""
 msgstr ""
 "Свяжитесь с нами для вопросов по услугам, специальных запросов или "
 "возможностей работы."
+
+#: .\templates\client\general\barbers.html:19
+msgid "Our Professional Barbers"
+msgstr "Парихмахеры"
+
+#: .\templates\client\general\barbers.html:20
+msgid "Choose a skilled barber for your next appointment"
+msgstr "Выберите опытного парикмахера для вашей следующей встречи"
+
+#: .\templates\client\general\barbers.html:23
+msgid "Back to Home"
+msgstr "Назад"
+
+#: .\templates\client\general\barbers.html:31
+msgid "barber"
+msgstr "Парихмахеры"
+
+#: .\templates\client\general\barbers.html:33
+msgid "available"
+msgstr "Доступно сегодня"
+
+#: .\templates\client\general\barbers.html:37
+msgid "Filter by"
+msgstr "Сортировать по"
+
+#: .\templates\client\general\barbers.html:39
+msgid "All Barbers"
+msgstr "Все барберы"
+
+#: .\templates\client\general\barbers.html:40
+msgid "Top Rated"
+msgstr "Лучшие"
+
+#: .\templates\client\general\barbers.html:41
+msgid "Most Experienced"
+msgstr "Премиальный опыт барбершопа"
+
+#: .\templates\client\general\barbers.html:70
+msgid "Available Today"
+msgstr "Доступно сегодня"
+
+#: .\templates\client\general\barbers.html:102
+msgid "Book Appointment"
+msgstr "Забронировать встречу"
+
+#: .\templates\client\general\barbers.html:113
+msgid "No Barbers Available"
+msgstr "Нет доступных категорий"
+
+#: .\templates\client\general\barbers.html:114
+msgid "Our barbers are currently fully booked or unavailable."
+msgstr "Наши барберы в настоящее время полностью заняты или недоступны."
+
+#: .\templates\client\general\barbers.html:116
+msgid "Return to Home"
+msgstr "Вернуться на главную"
 
 #: .\templates\client\general\contact-us.html:14
 msgid "Get In Touch"
@@ -743,9 +839,8 @@ msgstr "Готовы к новому образу?"
 msgid "Book your appointment today and get the style you deserve."
 msgstr "Запишитесь сегодня и получите стиль, который вам подходит."
 
-#: .\templates\client\general\home.html:145
-msgid "Book Now"
-msgstr "Записаться сейчас"
+#~ msgid "Service"
+#~ msgstr "Сервис"
 
 #~ msgid "Phone:"
 #~ msgstr "Телефон:"

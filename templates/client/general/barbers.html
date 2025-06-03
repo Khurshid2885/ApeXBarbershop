@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}{{ barber.name }} Barbers{% endblock %}
 
@@ -9,16 +10,17 @@
             <div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{% url 'services:home' %}" class="text-decoration-none">Home</a>
+                        <li class="breadcrumb-item"><a href="{% url 'services:home' %}"
+                                                       class="text-decoration-none">{% trans 'Home' %}</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Barbers</li>
+                        <li class="breadcrumb-item active" aria-current="page">{% trans 'Barbers' %}</li>
                     </ol>
                 </nav>
-                <h1 class="display-6 mt-2 mb-0">Our Professional Barbers</h1>
-                <p class="text-muted mt-2">Choose a skilled barber for your next appointment</p>
+                <h1 class="display-6 mt-2 mb-0">{% trans 'Our Professional Barbers' %}</h1>
+                <p class="text-muted mt-2">{% trans 'Choose a skilled barber for your next appointment' %}</p>
             </div>
             <a href="{% url 'services:home' %}" class="btn btn-outline-dark mt-3 mt-md-0">
-                <i class="bi bi-arrow-left me-2"></i>Back to Home
+                <i class="bi bi-arrow-left me-2"></i>{% trans 'Back to Home' %}
             </a>
         </div>
 
@@ -26,16 +28,17 @@
         {% if barbers %}
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-light rounded-3">
                 <div class="d-flex align-items-center mb-2 mb-md-0">
-                    <span class="text-muted me-2">{{ barbers|length }} barber{% if barbers|length != 1 %}s{% endif %}
-                        available</span>
+                    <span class="text-muted me-2">{{ barbers|length }} {% trans 'barber' %}{% if barbers|length != 1 %}
+                        s{% endif %}
+                        {% trans 'available' %}</span>
                 </div>
                 <div class="d-flex gap-2">
                     <div class="input-group input-group-sm">
-                        <span class="input-group-text bg-white">Filter by</span>
+                        <span class="input-group-text bg-white">{% trans 'Filter by' %}</span>
                         <select class="form-select form-select-sm" id="filterBarbers">
-                            <option value="all">All Barbers</option>
-                            <option value="top_rated">Top Rated</option>
-                            <option value="most_experienced">Most Experienced</option>
+                            <option value="all">{% trans 'All Barbers' %}</option>
+                            <option value="top_rated">{% trans 'Top Rated' %}</option>
+                            <option value="most_experienced">{% trans 'Most Experienced' %}</option>
                         </select>
                     </div>
                 </div>
@@ -64,7 +67,7 @@
 
                                 {% if barber.is_available %}
                                     <div class="position-absolute top-0 start-0 m-2">
-                                        <span class="badge bg-success">Available Today</span>
+                                        <span class="badge bg-success">{% trans 'Available Today' %}</span>
                                     </div>
                                 {% endif %}
                             </div>
@@ -96,7 +99,7 @@
 
                                 <a href="#"
                                    class="btn btn-primary w-100 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-calendar-check me-2"></i>Book Appointment
+                                    <i class="bi bi-calendar-check me-2"></i>{% trans 'Book Appointment' %}
                                 </a>
                             </div>
                         </div>
@@ -107,10 +110,10 @@
             <div class="text-center py-5 my-4">
                 <div class="empty-state">
                     <i class="bi bi-person-x display-1 text-muted mb-3"></i>
-                    <h4>No Barbers Available</h4>
-                    <p class="text-muted">Our barbers are currently fully booked or unavailable.</p>
+                    <h4>{% trans 'No Barbers Available' %}</h4>
+                    <p class="text-muted">{% trans 'Our barbers are currently fully booked or unavailable.' %}</p>
                     <a href="{% url 'services:home' %}" class="btn btn-outline-primary mt-3">
-                        Return to Home
+                        {% trans 'Return to Home' %}
                     </a>
                 </div>
             </div>
